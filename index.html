@@ -1,1844 +1,949 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Product in BD - Admin Panel</title>
 
-    <title>Personal Product in BD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        body {
+            background: #f5f6fa;
+            color: #222;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 20px 15px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 10px 5px 25px;
+            border-bottom: 1px solid #374151;
+            margin-bottom: 20px;
+        }
+
+        .logo h2 {
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .logo span {
+            color: #ff6b00;
+        }
+
+        .logo small {
+            display: block;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            color: #6b7280;
+            font-size: 12px;
+            margin: 20px 10px 8px;
+            text-transform: uppercase;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 14px;
+            color: #d1d5db;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #ff6b00;
+            color: white;
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        /* TOPBAR */
+
+        .topbar {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .page-title h2 {
+            font-size: 22px;
+        }
+
+        .page-title p {
+            color: #888;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .admin-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff6b00;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* CONTENT */
+
+        .content {
+            padding: 30px;
+        }
+
+        /* ================= CARDS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-card h4 {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card h2 {
+            font-size: 25px;
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: #fff1e8;
+            color: #ff6b00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-header h3 {
+            font-size: 18px;
+        }
+
+        .btn {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+            background: #ff6b00;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #e85e00;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .product {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .product-img {
+            height: 160px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+        }
+
+        .product-info {
+            padding: 14px;
+        }
+
+        .product-info h4 {
+            margin-bottom: 7px;
+        }
+
+        .category {
+            color: #ff6b00;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .stock {
+            color: #16a34a;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f9fafb;
+            color: #555;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+
+        .confirmed {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .cancelled {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .category-card .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .category-card h3 {
+            margin-bottom: 5px;
+        }
+
+        .category-card p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        .mobile-menu {
+            display: none;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        @media(max-width:1100px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width:700px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: .3s;
+                z-index: 100;
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     TOP BAR
-===================================================== -->
+<!-- ================= SIDEBAR ================= -->
 
-<div class="topbar">
-    <div class="container topbar-inner">
+<aside class="sidebar" id="sidebar">
 
-        <div>
-            🚚 Free Delivery on Selected Products
-        </div>
-
-        <div class="top-links">
-            <a href="#">Save More on App</a>
-            <a href="#">Customer Care</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Login</a>
-            <a href="#">Sign Up</a>
-        </div>
-
+    <div class="logo">
+        <h2>Personal Product <span>in BD</span></h2>
+        <small>Admin Panel</small>
     </div>
-</div>
 
+    <div class="menu">
 
-<!-- =====================================================
-     MAIN HEADER
-===================================================== -->
+        <div class="menu-title">Main</div>
 
-<header class="main-header">
-
-    <div class="container header-inner">
-
-        <!-- LOGO -->
-
-        <a href="#" class="logo">
-            <span>Personal</span>
-            <strong>Product</strong>
-            <small>in BD</small>
+        <a class="active" onclick="showPage('dashboard')">
+            <span class="menu-icon">🏠</span>
+            Dashboard
         </a>
 
+        <a onclick="showPage('products')">
+            <span class="menu-icon">📦</span>
+            Products
+        </a>
 
-        <!-- SEARCH -->
+        <a onclick="showPage('orders')">
+            <span class="menu-icon">🛒</span>
+            Orders
+        </a>
 
-        <div class="search-area">
+        <a onclick="showPage('customers')">
+            <span class="menu-icon">👥</span>
+            Customers
+        </a>
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search in Personal Product in BD..."
-                onkeyup="searchProducts()"
-            >
+        <div class="menu-title">Product Category</div>
 
-            <select id="searchCategory">
+        <a onclick="filterProducts('Personal Items')">
+            <span class="menu-icon">🎁</span>
+            Personal Items
+        </a>
 
-                <option value="all">
-                    All Categories
-                </option>
+        <a onclick="filterProducts('Men Items')">
+            <span class="menu-icon">👨</span>
+            Men Items
+        </a>
 
-                <option value="electronics">
-                    Electronics
-                </option>
+        <a onclick="filterProducts('Women Items')">
+            <span class="menu-icon">👩</span>
+            Women Items
+        </a>
 
-                <option value="gadgets">
-                    Gadgets
-                </option>
+        <a onclick="filterProducts('Gadgets')">
+            <span class="menu-icon">📱</span>
+            Gadgets
+        </a>
 
-                <option value="lifestyle">
-                    Lifestyle
-                </option>
+        <a onclick="filterProducts('Beauty')">
+            <span class="menu-icon">💄</span>
+            Beauty Items
+        </a>
 
-                <option value="others">
-                    Others
-                </option>
+        <a onclick="filterProducts('Home')">
+            <span class="menu-icon">🏠</span>
+            Home Items
+        </a>
 
-            </select>
+        <a onclick="filterProducts('Accessories')">
+            <span class="menu-icon">⌚</span>
+            Accessories
+        </a>
 
-            <button onclick="searchProducts()">
-                🔍
-            </button>
+        <div class="menu-title">Management</div>
 
-        </div>
+        <a onclick="showPage('stock')">
+            <span class="menu-icon">📊</span>
+            Stock
+        </a>
 
+        <a onclick="showPage('sales')">
+            <span class="menu-icon">💰</span>
+            Sales
+        </a>
 
-        <!-- HEADER ACTIONS -->
-
-        <div class="header-actions">
-
-            <a href="#" class="header-action">
-                👤
-                <span>
-                    Login<br>
-                    <b>Account</b>
-                </span>
-            </a>
-
-            <a href="#" class="header-action">
-                📦
-                <span>
-                    My<br>
-                    <b>Orders</b>
-                </span>
-            </a>
-
-            <button
-                class="cart-header"
-                onclick="openCart()">
-
-                🛒
-
-                <span id="cartCount">
-                    0
-                </span>
-
-            </button>
-
-        </div>
+        <a onclick="showPage('settings')">
+            <span class="menu-icon">⚙️</span>
+            Settings
+        </a>
 
     </div>
-
-</header>
-
-
-<!-- =====================================================
-     CATEGORY NAVIGATION
-===================================================== -->
-
-<nav class="category-nav">
-
-    <div class="container category-nav-inner">
-
-        <button
-            class="category-menu"
-            onclick="toggleCategoryMenu()">
-
-            ☰
-            Categories
-            <span>⌄</span>
-
-        </button>
-
-
-        <div class="category-links">
-
-            <a href="#products">
-                Electronics
-            </a>
-
-            <a href="#products">
-                Gadgets
-            </a>
-
-            <a href="#products">
-                Lifestyle
-            </a>
-
-            <a href="#products">
-                New Arrivals
-            </a>
-
-            <a href="#flash-sale">
-                Flash Sale
-            </a>
-
-            <a href="#products">
-                Best Deals
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-<!-- =====================================================
-     HERO AREA
-===================================================== -->
-
-<section class="hero-section">
-
-    <div class="container hero-layout">
-
-
-        <!-- LEFT CATEGORY MENU -->
-
-        <aside
-            class="side-category"
-            id="sideCategory">
-
-            <h3>
-                Categories
-            </h3>
-
-            <a href="#">
-                📱 Mobile & Accessories
-                <span>›</span>
-            </a>
-
-            <a href="#">
-                💻 Computer & Technology
-                <span>›</span>
-            </a>
-
-            <a href="#">
-                🎧 Audio & Headphones
-                <span>›</span>
-            </a>
-
-            <a href="#">
-                ⚡ Electronics
-                <span>›</span>
-            </a>
-
-            <a href="#">
-                🏠 Home & Lifestyle
-                <span>›</span>
-            </a>
-
-            <a href="#">
-                🎮 Gaming
-                <span>›</span>
-            </a>
-
-            <a href="#">
-                🎁 Other Products
-                <span>›</span>
-            </a>
-
-            <a href="#" class="all-category">
-                View All Categories →
-            </a>
-
-        </aside>
-
-
-        <!-- MAIN BANNER -->
-
-        <div class="hero-banner">
-
-            <div class="banner-content">
-
-                <span class="banner-small">
-                    PERSONAL PRODUCT IN BD
-                </span>
-
-                <h1>
-                    Discover
-                    <br>
-                    Amazing Products
-                </h1>
-
-                <p>
-                    Great products.
-                    Great prices.
-                    Delivered to your door.
-                </p>
-
-                <div class="banner-price">
-
-                    <span>
-                        Starting From
-                    </span>
-
-                    <strong>
-                        ৳ 499
-                    </strong>
-
-                </div>
-
-                <a
-                    href="#products"
-                    class="shop-now">
-
-                    SHOP NOW →
-
-                </a>
-
-            </div>
-
-
-            <div class="banner-image">
-
-                <!-- নিজের banner.jpg এখানে বসাবে -->
-
-                <img
-                    src="images/banner.jpg"
-                    alt="Personal Product Banner"
-                >
-
-            </div>
-
-
-            <div class="banner-dots">
-
-                <span class="active"></span>
-                <span></span>
-                <span></span>
-
-            </div>
-
-        </div>
-
-
-        <!-- RIGHT QUICK BOX -->
-
-        <aside class="quick-box">
-
-            <div class="quick-user">
-
-                <div class="user-icon">
-                    👤
-                </div>
-
-                <h3>
-                    Welcome!
-                </h3>
-
-                <p>
-                    Login to enjoy
-                    more benefits.
-                </p>
-
-                <button>
-                    LOGIN
-                </button>
-
-                <button class="register-btn">
-                    REGISTER
-                </button>
-
-            </div>
-
-
-            <div class="quick-offer">
-
-                <span>
-                    🔥 HOT DEAL
-                </span>
-
-                <strong>
-                    Up to 30% OFF
-                </strong>
-
-                <a href="#flash-sale">
-                    Shop Now →
-                </a>
-
-            </div>
-
-        </aside>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     SERVICE BAR
-===================================================== -->
-
-<section class="service-bar">
-
-    <div class="container service-grid">
-
-        <div>
-            <span>🚚</span>
-            <div>
-                <strong>Free Delivery</strong>
-                <small>Selected Products</small>
-            </div>
-        </div>
-
-        <div>
-            <span>💳</span>
-            <div>
-                <strong>Secure Payment</strong>
-                <small>bKash / Nagad / COD</small>
-            </div>
-        </div>
-
-        <div>
-            <span>🔄</span>
-            <div>
-                <strong>Easy Returns</strong>
-                <small>Customer Support</small>
-            </div>
-        </div>
-
-        <div>
-            <span>✅</span>
-            <div>
-                <strong>Quality Products</strong>
-                <small>Checked Products</small>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     FLASH SALE
-===================================================== -->
-
-<section
-    class="flash-section"
-    id="flash-sale">
-
-    <div class="container">
-
-        <div class="section-top">
-
-            <div class="section-title">
-
-                <span class="flash-icon">
-                    ⚡
-                </span>
-
-                <h2>
-                    Flash Sale
-                </h2>
-
-                <span class="ending">
-                    Ending Soon
-                </span>
-
-            </div>
-
-
-            <div class="countdown">
-
-                <span>
-                    00
-                </span>
-
-                <b>:</b>
-
-                <span>
-                    45
-                </span>
-
-                <b>:</b>
-
-                <span>
-                    32
-                </span>
-
-            </div>
-
-
-            <a
-                href="#products"
-                class="view-all">
-
-                View All
-                →
-
-            </a>
-
-        </div>
-
-
-        <div class="flash-products">
-
-
-            <!-- FLASH PRODUCT 1 -->
-
-            <div class="flash-card">
-
-                <div class="flash-image">
-
-                    <span>
-                        -30%
-                    </span>
-
-                    <img
-                        src="images/product-1.jpg"
-                        alt="Product 1"
-                    >
-
-                </div>
-
-                <h3>
-                    Product Name One
-                </h3>
-
-                <strong>
-                    ৳ 1,250
-                </strong>
-
-                <del>
-                    ৳ 1,800
-                </del>
-
-                <div class="sold">
-                    ▰▰▰▰▱ 68% Sold
-                </div>
-
-            </div>
-
-
-            <!-- FLASH PRODUCT 2 -->
-
-            <div class="flash-card">
-
-                <div class="flash-image">
-
-                    <span>
-                        -25%
-                    </span>
-
-                    <img
-                        src="images/product-2.jpg"
-                        alt="Product 2"
-                    >
-
-                </div>
-
-                <h3>
-                    Product Name Two
-                </h3>
-
-                <strong>
-                    ৳ 1,590
-                </strong>
-
-                <del>
-                    ৳ 2,100
-                </del>
-
-                <div class="sold">
-                    ▰▰▰▱▱ 52% Sold
-                </div>
-
-            </div>
-
-
-            <!-- FLASH PRODUCT 3 -->
-
-            <div class="flash-card">
-
-                <div class="flash-image">
-
-                    <span>
-                        -20%
-                    </span>
-
-                    <img
-                        src="images/product-3.jpg"
-                        alt="Product 3"
-                    >
-
-                </div>
-
-                <h3>
-                    Product Name Three
-                </h3>
-
-                <strong>
-                    ৳ 990
-                </strong>
-
-                <del>
-                    ৳ 1,250
-                </del>
-
-                <div class="sold">
-                    ▰▰▰▰▱ 75% Sold
-                </div>
-
-            </div>
-
-
-            <!-- FLASH PRODUCT 4 -->
-
-            <div class="flash-card">
-
-                <div class="flash-image">
-
-                    <span>
-                        -15%
-                    </span>
-
-                    <img
-                        src="images/product-4.jpg"
-                        alt="Product 4"
-                    >
-
-                </div>
-
-                <h3>
-                    Product Name Four
-                </h3>
-
-                <strong>
-                    ৳ 2,490
-                </strong>
-
-                <del>
-                    ৳ 2,900
-                </del>
-
-                <div class="sold">
-                    ▰▰▰▰▱ 61% Sold
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     JUST FOR YOU / PRODUCTS
-===================================================== -->
-
-<section
-    class="products-section"
-    id="products">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div>
-
-                <span>
-                    RECOMMENDED FOR YOU
-                </span>
-
-                <h2>
-                    Just For You
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="products-grid"
-            id="productGrid">
-
-
-            <!-- =================================================
-                 PRODUCT 1
-            ================================================== -->
-
-            <article
-                class="product-card"
-                data-category="electronics"
-                data-name="Product Name One">
-
-                <div class="product-photo">
-
-                    <span class="discount">
-                        -17%
-                    </span>
-
-                    <button
-                        class="heart"
-                        onclick="toggleWishlist(this)">
-                        ♡
-                    </button>
-
-                    <img
-                        src="images/product-1.jpg"
-                        alt="Product Name One"
-                    >
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <span class="category-label">
-                        Electronics
-                    </span>
-
-                    <h3>
-                        Product Name One
-                    </h3>
-
-                    <div class="rating">
-                        ⭐⭐⭐⭐⭐
-                        <span>
-                            (4.9)
-                        </span>
-                    </div>
-
-                    <div class="product-price">
-
-                        <strong>
-                            ৳ 1,250
-                        </strong>
-
-                        <del>
-                            ৳ 1,500
-                        </del>
-
-                    </div>
-
-                    <div class="delivery">
-                        🚚 Free Delivery
-                    </div>
-
-                    <div class="product-buttons">
-
-                        <button
-                            onclick="showDetails(1)"
-                            class="details">
-
-                            Details
-
-                        </button>
-
-                        <button
-                            onclick="addToCart(1)"
-                            class="add-cart">
-
-                            🛒 Add
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PRODUCT 2
-            ================================================== -->
-
-            <article
-                class="product-card"
-                data-category="gadgets"
-                data-name="Product Name Two">
-
-                <div class="product-photo">
-
-                    <span class="discount">
-                        -16%
-                    </span>
-
-                    <button
-                        class="heart"
-                        onclick="toggleWishlist(this)">
-                        ♡
-                    </button>
-
-                    <img
-                        src="images/product-2.jpg"
-                        alt="Product Name Two"
-                    >
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <span class="category-label">
-                        Gadgets
-                    </span>
-
-                    <h3>
-                        Product Name Two
-                    </h3>
-
-                    <div class="rating">
-                        ⭐⭐⭐⭐⭐
-                        <span>
-                            (4.8)
-                        </span>
-                    </div>
-
-                    <div class="product-price">
-
-                        <strong>
-                            ৳ 1,850
-                        </strong>
-
-                        <del>
-                            ৳ 2,200
-                        </del>
-
-                    </div>
-
-                    <div class="delivery">
-                        🚚 Free Delivery
-                    </div>
-
-                    <div class="product-buttons">
-
-                        <button
-                            onclick="showDetails(2)"
-                            class="details">
-
-                            Details
-
-                        </button>
-
-                        <button
-                            onclick="addToCart(2)"
-                            class="add-cart">
-
-                            🛒 Add
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PRODUCT 3
-            ================================================== -->
-
-            <article
-                class="product-card"
-                data-category="lifestyle"
-                data-name="Product Name Three">
-
-                <div class="product-photo">
-
-                    <span class="discount">
-                        -21%
-                    </span>
-
-                    <button
-                        class="heart"
-                        onclick="toggleWishlist(this)">
-                        ♡
-                    </button>
-
-                    <img
-                        src="images/product-3.jpg"
-                        alt="Product Name Three"
-                    >
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <span class="category-label">
-                        Lifestyle
-                    </span>
-
-                    <h3>
-                        Product Name Three
-                    </h3>
-
-                    <div class="rating">
-                        ⭐⭐⭐⭐⭐
-                        <span>
-                            (4.9)
-                        </span>
-                    </div>
-
-                    <div class="product-price">
-
-                        <strong>
-                            ৳ 990
-                        </strong>
-
-                        <del>
-                            ৳ 1,250
-                        </del>
-
-                    </div>
-
-                    <div class="delivery">
-                        🚚 Free Delivery
-                    </div>
-
-                    <div class="product-buttons">
-
-                        <button
-                            onclick="showDetails(3)"
-                            class="details">
-
-                            Details
-
-                        </button>
-
-                        <button
-                            onclick="addToCart(3)"
-                            class="add-cart">
-
-                            🛒 Add
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PRODUCT 4
-            ================================================== -->
-
-            <article
-                class="product-card"
-                data-category="electronics"
-                data-name="Product Name Four">
-
-                <div class="product-photo">
-
-                    <span class="discount">
-                        -14%
-                    </span>
-
-                    <button
-                        class="heart"
-                        onclick="toggleWishlist(this)">
-                        ♡
-                    </button>
-
-                    <img
-                        src="images/product-4.jpg"
-                        alt="Product Name Four"
-                    >
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <span class="category-label">
-                        Electronics
-                    </span>
-
-                    <h3>
-                        Product Name Four
-                    </h3>
-
-                    <div class="rating">
-                        ⭐⭐⭐⭐⭐
-                        <span>
-                            (4.7)
-                        </span>
-                    </div>
-
-                    <div class="product-price">
-
-                        <strong>
-                            ৳ 2,490
-                        </strong>
-
-                        <del>
-                            ৳ 2,900
-                        </del>
-
-                    </div>
-
-                    <div class="delivery">
-                        🚚 Free Delivery
-                    </div>
-
-                    <div class="product-buttons">
-
-                        <button
-                            onclick="showDetails(4)"
-                            class="details">
-
-                            Details
-
-                        </button>
-
-                        <button
-                            onclick="addToCart(4)"
-                            class="add-cart">
-
-                            🛒 Add
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PRODUCT 5
-            ================================================== -->
-
-            <article
-                class="product-card"
-                data-category="gadgets"
-                data-name="Product Name Five">
-
-                <div class="product-photo">
-
-                    <span class="discount">
-                        -20%
-                    </span>
-
-                    <button
-                        class="heart"
-                        onclick="toggleWishlist(this)">
-                        ♡
-                    </button>
-
-                    <img
-                        src="images/product-5.jpg"
-                        alt="Product Name Five"
-                    >
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <span class="category-label">
-                        Gadgets
-                    </span>
-
-                    <h3>
-                        Product Name Five
-                    </h3>
-
-                    <div class="rating">
-                        ⭐⭐⭐⭐⭐
-                        <span>
-                            (4.9)
-                        </span>
-                    </div>
-
-                    <div class="product-price">
-
-                        <strong>
-                            ৳ 1,590
-                        </strong>
-
-                        <del>
-                            ৳ 1,990
-                        </del>
-
-                    </div>
-
-                    <div class="delivery">
-                        🚚 Free Delivery
-                    </div>
-
-                    <div class="product-buttons">
-
-                        <button
-                            onclick="showDetails(5)"
-                            class="details">
-
-                            Details
-
-                        </button>
-
-                        <button
-                            onclick="addToCart(5)"
-                            class="add-cart">
-
-                            🛒 Add
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PRODUCT 6
-            ================================================== -->
-
-            <article
-                class="product-card"
-                data-category="lifestyle"
-                data-name="Product Name Six">
-
-                <div class="product-photo">
-
-                    <span class="discount">
-                        -21%
-                    </span>
-
-                    <button
-                        class="heart"
-                        onclick="toggleWishlist(this)">
-                        ♡
-                    </button>
-
-                    <img
-                        src="images/product-6.jpg"
-                        alt="Product Name Six"
-                    >
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <span class="category-label">
-                        Lifestyle
-                    </span>
-
-                    <h3>
-                        Product Name Six
-                    </h3>
-
-                    <div class="rating">
-                        ⭐⭐⭐⭐⭐
-                        <span>
-                            (4.8)
-                        </span>
-                    </div>
-
-                    <div class="product-price">
-
-                        <strong>
-                            ৳ 750
-                        </strong>
-
-                        <del>
-                            ৳ 950
-                        </del>
-
-                    </div>
-
-                    <div class="delivery">
-                        🚚 Free Delivery
-                    </div>
-
-                    <div class="product-buttons">
-
-                        <button
-                            onclick="showDetails(6)"
-                            class="details">
-
-                            Details
-
-                        </button>
-
-                        <button
-                            onclick="addToCart(6)"
-                            class="add-cart">
-
-                            🛒 Add
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     BIG PROMO BANNER
-===================================================== -->
-
-<section class="promo-section">
-
-    <div class="container">
-
-        <div class="promo-banner">
-
-            <div>
-
-                <span>
-                    WEEKEND SPECIAL
-                </span>
-
-                <h2>
-                    Upgrade Your Everyday
-                    <br>
-                    Shopping Experience
-                </h2>
-
-                <p>
-                    Discover selected products at special prices.
-                </p>
-
-                <a
-                    href="#products"
-                    class="promo-button">
-
-                    SHOP NOW →
-
-                </a>
-
-            </div>
-
-
-            <img
-                src="images/banner-2.jpg"
-                alt="Special Offer"
-            >
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PAYMENT SECTION
-===================================================== -->
-
-<section class="payment-section">
-
-    <div class="container">
-
-        <div class="payment-title">
-
-            <span>
-                EASY & SECURE PAYMENT
-            </span>
-
-            <h2>
-                Pay Your Way
-            </h2>
-
-        </div>
-
-
-        <div class="payment-grid">
-
-            <div class="payment-card">
-
-                <div class="payment-logo bkash">
-                    bKash
-                </div>
-
-                <h3>
-                    bKash
-                </h3>
-
-                <p>
-                    Pay securely using bKash.
-                </p>
-
-            </div>
-
-
-            <div class="payment-card">
-
-                <div class="payment-logo nagad">
-                    Nagad
-                </div>
-
-                <h3>
-                    Nagad
-                </h3>
-
-                <p>
-                    Pay securely using Nagad.
-                </p>
-
-            </div>
-
-
-            <div class="payment-card">
-
-                <div class="payment-logo cod">
-                    COD
-                </div>
-
-                <h3>
-                    Cash on Delivery
-                </h3>
-
-                <p>
-                    Pay when your product arrives.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     REVIEWS
-===================================================== -->
-
-<section class="reviews-section">
-
-    <div class="container">
-
-        <div class="section-heading center">
-
-            <span>
-                CUSTOMER FEEDBACK
-            </span>
-
-            <h2>
-                What Customers Say
-            </h2>
-
-        </div>
-
-
-        <div class="reviews-grid">
-
-            <div class="review-card">
-
-                <div class="review-stars">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p>
-                    “Product quality was very good and
-                    delivery was fast.”
-                </p>
-
-                <strong>
-                    — Customer, Dhaka
-                </strong>
-
-            </div>
-
-
-            <div class="review-card">
-
-                <div class="review-stars">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p>
-                    “Very easy ordering process.
-                    Product arrived safely.”
-                </p>
-
-                <strong>
-                    — Customer, Chattogram
-                </strong>
-
-            </div>
-
-
-            <div class="review-card">
-
-                <div class="review-stars">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p>
-                    “Good price and nice service.
-                    I will order again.”
-                </p>
-
-                <strong>
-                    — Customer, Sylhet
-                </strong>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="footer">
-
-    <div class="container footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="#" class="logo">
-                <span>Personal</span>
-                <strong>Product</strong>
-                <small>in BD</small>
-            </a>
-
-            <p>
-                Your trusted online shopping destination
-                in Bangladesh.
-            </p>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                Customer Service
-            </h3>
-
-            <a href="#">
-                Contact Us
-            </a>
-
-            <a href="#">
-                Delivery Information
-            </a>
-
-            <a href="#">
-                Return Policy
-            </a>
-
-            <a href="#">
-                Privacy Policy
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                Payment
-            </h3>
-
-            <span>
-                ✓ bKash
-            </span>
-
-            <span>
-                ✓ Nagad
-            </span>
-
-            <span>
-                ✓ Cash on Delivery
-            </span>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                Contact
-            </h3>
-
-            <span>
-                📞 01XXXXXXXXX
-            </span>
-
-            <span>
-                📧 support@personalproductbd.com
-            </span>
-
-            <span>
-                📍 Bangladesh
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="copyright">
-
-        © 2026 Personal Product in BD.
-        All Rights Reserved.
-
-    </div>
-
-</footer>
-
-
-<!-- =====================================================
-     PRODUCT DETAILS MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="productModal">
-
-    <div class="modal-content">
-
-        <button
-            class="modal-close"
-            onclick="closeDetails()">
-
-            ×
-
-        </button>
-
-
-        <div class="modal-product">
-
-            <div class="modal-photo">
-
-                <img
-                    id="modalImage"
-                    src=""
-                    alt="Product"
-                >
-
-            </div>
-
-
-            <div class="modal-info">
-
-                <span id="modalCategory">
-                    PRODUCT
-                </span>
-
-                <h2 id="modalTitle">
-                    Product Name
-                </h2>
-
-                <div class="modal-rating">
-                    ⭐⭐⭐⭐⭐
-                    <span>4.9</span>
-                </div>
-
-                <div class="modal-price">
-                    <strong id="modalPrice">
-                        ৳ 0
-                    </strong>
-                </div>
-
-                <p id="modalDescription">
-                    Product description goes here.
-                </p>
-
-                <div class="features">
-
-                    <span>✓ Quality Checked</span>
-                    <span>✓ Home Delivery</span>
-                    <span>✓ Secure Payment</span>
-                    <span>✓ Customer Support</span>
-
-                </div>
-
-                <button
-                    class="modal-buy"
-                    onclick="modalBuy()">
-
-                    🛒 Buy Now
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     CART SIDEBAR
-===================================================== -->
-
-<div
-    class="cart-overlay"
-    id="cartOverlay"
-    onclick="closeCart()">
-</div>
-
-
-<aside
-    class="cart-sidebar"
-    id="cartSidebar">
-
-    <div class="cart-header">
-
-        <h2>
-            🛒 Shopping Cart
-        </h2>
-
-        <button onclick="closeCart()">
-            ×
-        </button>
-
-    </div>
-
-
-    <div
-        class="cart-items"
-        id="cartItems">
-
-        <div class="empty-cart">
-
-            <div>
-                🛒
-            </div>
-
-            <h3>
-                Your cart is empty
-            </h3>
-
-            <p>
-                Add products to your cart.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="cart-bottom">
-
-        <div class="cart-total">
-
-            <span>
-                Total
-            </span>
-
-            <strong id="cartTotal">
-                ৳ 0
-            </strong>
-
-        </div>
-
-        <button
-            class="checkout-button"
-            onclick="openCheckout()">
-
-            Proceed to Checkout →
-
-        </button>
-
-    </div>
-
 </aside>
 
 
-<!-- =====================================================
-     CHECKOUT
-===================================================== -->
+<!-- ================= MAIN ================= -->
 
-<div
-    class="modal"
-    id="checkoutModal">
+<main class="main">
 
-    <div class="modal-content checkout">
+    <!-- TOPBAR -->
 
-        <button
-            class="modal-close"
-            onclick="closeCheckout()">
+    <header class="topbar">
 
-            ×
-
-        </button>
-
-
-        <div class="checkout-title">
-
-            <span>
-                ORDER CHECKOUT
-            </span>
-
-            <h2>
-                Complete Your Order
-            </h2>
-
+        <div class="mobile-menu" onclick="toggleSidebar()">
+            ☰
         </div>
 
+        <div class="page-title">
+            <h2>Dashboard</h2>
+            <p>Welcome to Personal Product in BD</p>
+        </div>
 
-        <form
-            id="checkoutForm"
-            onsubmit="placeOrder(event)">
+        <div class="admin-info">
+            <div>
+                <strong>Admin</strong>
+            </div>
 
+            <div class="admin-avatar">
+                A
+            </div>
+        </div>
 
-            <label>
-                Full Name *
-            </label>
-
-            <input
-                type="text"
-                id="customerName"
-                placeholder="Enter your full name"
-                required
-            >
-
-
-            <label>
-                Phone Number *
-            </label>
-
-            <input
-                type="tel"
-                id="customerPhone"
-                placeholder="01XXXXXXXXX"
-                required
-            >
+    </header>
 
 
-            <label>
-                Delivery Address *
-            </label>
+    <!-- CONTENT -->
 
-            <textarea
-                id="customerAddress"
-                placeholder="House, Road, Area, District"
-                required></textarea>
+    <div class="content">
 
+        <!-- ================= STATS ================= -->
 
-            <label>
-                Payment Method *
-            </label>
+        <div class="stats">
 
-            <select
-                id="paymentMethod"
-                required>
+            <div class="stat-card">
 
-                <option value="">
-                    Select Payment Method
-                </option>
+                <div>
+                    <h4>Total Products</h4>
+                    <h2>128</h2>
+                </div>
 
-                <option value="COD">
-                    Cash on Delivery
-                </option>
-
-                <option value="bKash">
-                    bKash
-                </option>
-
-                <option value="Nagad">
-                    Nagad
-                </option>
-
-            </select>
-
-
-            <div class="checkout-total">
-
-                <span>
-                    Order Total
-                </span>
-
-                <strong id="checkoutTotal">
-                    ৳ 0
-                </strong>
+                <div class="stat-icon">
+                    📦
+                </div>
 
             </div>
 
 
-            <button
-                type="submit"
-                class="place-order">
+            <div class="stat-card">
 
-                ✓ PLACE ORDER
+                <div>
+                    <h4>Total Orders</h4>
+                    <h2>356</h2>
+                </div>
 
-            </button>
+                <div class="stat-icon">
+                    🛒
+                </div>
 
-        </form>
-
-    </div>
-
-</div>
+            </div>
 
 
-<!-- =====================================================
-     SUCCESS
-===================================================== -->
+            <div class="stat-card">
 
-<div
-    class="success-modal"
-    id="successModal">
+                <div>
+                    <h4>Total Customers</h4>
+                    <h2>245</h2>
+                </div>
 
-    <div class="success-box">
+                <div class="stat-icon">
+                    👥
+                </div>
 
-        <div class="success-icon">
-            ✓
-        </div>
+            </div>
 
-        <h2>
-            Order Successful!
-        </h2>
 
-        <p>
-            Thank you for shopping with us.
-        </p>
+            <div class="stat-card">
 
-        <div class="order-number">
+                <div>
+                    <h4>Total Sales</h4>
+                    <h2>৳85,650</h2>
+                </div>
 
-            Order ID:
+                <div class="stat-icon">
+                    💰
+                </div>
 
-            <strong id="orderNumber">
-                PPBD-000001
-            </strong>
+            </div>
 
         </div>
 
-        <button
-            onclick="closeSuccess()">
 
-            Continue Shopping
+        <!-- ================= CATEGORY ================= -->
 
-        </button>
+        <div class="section">
+
+            <div class="section-header">
+
+                <h3>Product Categories</h3>
+
+                <button class="btn" onclick="addCategory()">
+                    + Add Category
+                </button>
+
+            </div>
+
+            <div class="products">
+
+                <div class="category-card">
+                    <div class="icon">🎁</div>
+                    <h3>Personal Items</h3>
+                    <p>24 Products</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="icon">👨</div>
+                    <h3>Men Items</h3>
+                    <p>18 Products</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="icon">👩</div>
+                    <h3>Women Items</h3>
+                    <p>26 Products</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="icon">📱</div>
+                    <h3>Gadgets</h3>
+                    <p>22 Products</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h3>Latest Products</h3>
+
+                <button class="btn" onclick="addProduct()">
+                    + Add Product
+                </button>
+
+            </div>
+
+            <div class="products">
+
+                <div class="product">
+
+                    <div class="product-img">
+                        👕
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="category">
+                            Men Items
+                        </span>
+
+                        <h4>Premium T-Shirt</h4>
+
+                        <div class="price">
+                            ৳850
+                        </div>
+
+                        <div class="stock">
+                            Stock: 35
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product">
+
+                    <div class="product-img">
+                        👗
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="category">
+                            Women Items
+                        </span>
+
+                        <h4>Fashion Dress</h4>
+
+                        <div class="price">
+                            ৳1,450
+                        </div>
+
+                        <div class="stock">
+                            Stock: 18
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product">
+
+                    <div class="product-img">
+                        🎧
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="category">
+                            Gadgets
+                        </span>
+
+                        <h4>Wireless Headphone</h4>
+
+                        <div class="price">
+                            ৳1,250
+                        </div>
+
+                        <div class="stock">
+                            Stock: 42
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product">
+
+                    <div class="product-img">
+                        🧴
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="category">
+                            Personal Items
+                        </span>
+
+                        <h4>Personal Care Kit</h4>
+
+                        <div class="price">
+                            ৳650
+                        </div>
+
+                        <div class="stock">
+                            Stock: 27
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= ORDERS ================= -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h3>Recent Orders</h3>
+
+                <button class="btn">
+                    View All
+                </button>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>#PP1001</td>
+                            <td>Rahim</td>
+                            <td>Premium T-Shirt</td>
+                            <td>৳850</td>
+                            <td>COD</td>
+                            <td>
+                                <span class="status pending">
+                                    Pending
+                                </span>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>#PP1002</td>
+                            <td>Karim</td>
+                            <td>Wireless Headphone</td>
+                            <td>৳1,250</td>
+                            <td>bKash</td>
+                            <td>
+                                <span class="status confirmed">
+                                    Confirmed
+                                </span>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>#PP1003</td>
+                            <td>Nusrat</td>
+                            <td>Fashion Dress</td>
+                            <td>৳1,450</td>
+                            <td>Nagad</td>
+                            <td>
+                                <span class="status confirmed">
+                                    Confirmed
+                                </span>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>#PP1004</td>
+                            <td>Jannat</td>
+                            <td>Personal Care Kit</td>
+                            <td>৳650</td>
+                            <td>COD</td>
+                            <td>
+                                <span class="status cancelled">
+                                    Cancelled
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+</main>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+<!-- ================= JAVASCRIPT ================= -->
 
-<script src="script.js"></script>
+<script>
+
+    function toggleSidebar() {
+
+        document
+            .getElementById("sidebar")
+            .classList
+            .toggle("show");
+
+    }
+
+
+    function showPage(page) {
+
+        alert(
+            page.toUpperCase() +
+            " section selected."
+        );
+
+    }
+
+
+    function filterProducts(category) {
+
+        alert(
+            "Showing products from: " +
+            category
+        );
+
+    }
+
+
+    function addProduct() {
+
+        let name = prompt(
+            "Enter Product Name:"
+        );
+
+        if (name) {
+
+            alert(
+                name +
+                " added successfully!"
+            );
+
+        }
+
+    }
+
+
+    function addCategory() {
+
+        let category = prompt(
+            "Enter New Category:"
+        );
+
+        if (category) {
+
+            alert(
+                category +
+                " category created!"
+            );
+
+        }
+
+    }
+
+</script>
 
 </body>
 </html>
-```
