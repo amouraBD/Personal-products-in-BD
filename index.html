@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Personal Product in BD | Online Shopping</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+    <div class="container nav">
+
+        <div class="logo">
+            <span>Personal</span>
+            <strong>Product</strong>
+            <small>in BD</small>
+        </div>
+
+        <nav class="menu">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="cart-btn" onclick="openCart()">
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="container hero-content">
+
+        <div class="hero-text">
+
+            <div class="hero-badge">
+                🇧🇩 Trusted Online Shopping in Bangladesh
+            </div>
+
+            <h1>
+                Discover Your
+                <span>Favorite Products</span>
+                in Bangladesh
+            </h1>
+
+            <p>
+                Quality products, attractive prices and easy home delivery.
+                Shop your favorite products from Personal Product in BD.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#products" class="primary-btn">
+                    🛍️ Shop Now
+                </a>
+
+                <a href="#about" class="secondary-btn">
+                    Learn More
+                </a>
+            </div>
+
+            <div class="hero-features">
+
+                <div>
+                    <b>🚚</b>
+                    <span>Fast Delivery</span>
+                </div>
+
+                <div>
+                    <b>💳</b>
+                    <span>Easy Payment</span>
+                </div>
+
+                <div>
+                    <b>🔒</b>
+                    <span>Secure Order</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="hero-circle"></div>
+
+            <div class="hero-product">
+                <span>NEW</span>
+                <div class="product-placeholder">
+                    🛍️
+                </div>
+                <h3>Special Collection</h3>
+                <p>Selected Products</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORY BAR ================= -->
+
+<section class="category-section">
+
+    <div class="container">
+
+        <div class="category-title">
+            <span>Explore</span>
+            <h2>Shop by Category</h2>
+        </div>
+
+        <div class="categories">
+
+            <button onclick="filterProducts('all')" class="category active">
+                <span>✨</span>
+                All Products
+            </button>
+
+            <button onclick="filterProducts('electronics')" class="category">
+                <span>⚡</span>
+                Electronics
+            </button>
+
+            <button onclick="filterProducts('gadgets')" class="category">
+                <span>📱</span>
+                Gadgets
+            </button>
+
+            <button onclick="filterProducts('lifestyle')" class="category">
+                <span>🏠</span>
+                Lifestyle
+            </button>
+
+            <button onclick="filterProducts('others')" class="category">
+                <span>🎁</span>
+                Others
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="products-section" id="products">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-label">OUR PRODUCTS</span>
+                <h2>Featured Products</h2>
+                <p>Choose your favorite product and order easily.</p>
+            </div>
+
+            <div class="product-search">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search product..."
+                    onkeyup="searchProducts()"
+                >
+                🔍
+            </div>
+
+        </div>
+
+
+        <div class="products-grid" id="productGrid">
+
+
+            <!-- PRODUCT 01 -->
+
+            <article class="product-card" data-category="electronics" data-name="Premium Product One">
+
+                <div class="product-image">
+
+                    <div class="product-tag">
+                        NEW
+                    </div>
+
+                    <img
+                        src="https://via.placeholder.com/500x500?text=Product+01"
+                        alt="Product 01"
+                    >
+
+                    <button
+                        class="quick-view"
+                        onclick="showDetails(1)"
+                    >
+                        👁 Quick View
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Electronics
+                    </span>
+
+                    <h3>Product Name One</h3>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(5.0)</span>
+                    </div>
+
+                    <div class="price">
+                        <strong>৳ 1,250</strong>
+                        <del>৳ 1,500</del>
+                    </div>
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="details-btn"
+                            onclick="showDetails(1)"
+                        >
+                            Product Details
+                        </button>
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyProduct(1)"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 02 -->
+
+            <article class="product-card" data-category="gadgets" data-name="Premium Product Two">
+
+                <div class="product-image">
+
+                    <div class="product-tag sale">
+                        SALE
+                    </div>
+
+                    <img
+                        src="https://via.placeholder.com/500x500?text=Product+02"
+                        alt="Product 02"
+                    >
+
+                    <button
+                        class="quick-view"
+                        onclick="showDetails(2)"
+                    >
+                        👁 Quick View
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Gadgets
+                    </span>
+
+                    <h3>Product Name Two</h3>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.9)</span>
+                    </div>
+
+                    <div class="price">
+                        <strong>৳ 1,850</strong>
+                        <del>৳ 2,200</del>
+                    </div>
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="details-btn"
+                            onclick="showDetails(2)"
+                        >
+                            Product Details
+                        </button>
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyProduct(2)"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 03 -->
+
+            <article class="product-card" data-category="lifestyle" data-name="Premium Product Three">
+
+                <div class="product-image">
+
+                    <div class="product-tag">
+                        POPULAR
+                    </div>
+
+                    <img
+                        src="https://via.placeholder.com/500x500?text=Product+03"
+                        alt="Product 03"
+                    >
+
+                    <button
+                        class="quick-view"
+                        onclick="showDetails(3)"
+                    >
+                        👁 Quick View
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Lifestyle
+                    </span>
+
+                    <h3>Product Name Three</h3>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.8)</span>
+                    </div>
+
+                    <div class="price">
+                        <strong>৳ 990</strong>
+                        <del>৳ 1,200</del>
+                    </div>
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="details-btn"
+                            onclick="showDetails(3)"
+                        >
+                            Product Details
+                        </button>
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyProduct(3)"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 04 -->
+
+            <article class="product-card" data-category="electronics" data-name="Premium Product Four">
+
+                <div class="product-image">
+
+                    <div class="product-tag">
+                        HOT
+                    </div>
+
+                    <img
+                        src="https://via.placeholder.com/500x500?text=Product+04"
+                        alt="Product 04"
+                    >
+
+                    <button
+                        class="quick-view"
+                        onclick="showDetails(4)"
+                    >
+                        👁 Quick View
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Electronics
+                    </span>
+
+                    <h3>Product Name Four</h3>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.7)</span>
+                    </div>
+
+                    <div class="price">
+                        <strong>৳ 2,490</strong>
+                        <del>৳ 2,900</del>
+                    </div>
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="details-btn"
+                            onclick="showDetails(4)"
+                        >
+                            Product Details
+                        </button>
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyProduct(4)"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 05 -->
+
+            <article class="product-card" data-category="gadgets" data-name="Premium Product Five">
+
+                <div class="product-image">
+
+                    <div class="product-tag sale">
+                        -20%
+                    </div>
+
+                    <img
+                        src="https://via.placeholder.com/500x500?text=Product+05"
+                        alt="Product 05"
+                    >
+
+                    <button
+                        class="quick-view"
+                        onclick="showDetails(5)"
+                    >
+                        👁 Quick View
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Gadgets
+                    </span>
+
+                    <h3>Product Name Five</h3>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.9)</span>
+                    </div>
+
+                    <div class="price">
+                        <strong>৳ 1,590</strong>
+                        <del>৳ 1,990</del>
+                    </div>
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="details-btn"
+                            onclick="showDetails(5)"
+                        >
+                            Product Details
+                        </button>
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyProduct(5)"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 06 -->
+
+            <article class="product-card" data-category="others" data-name="Premium Product Six">
+
+                <div class="product-image">
+
+                    <div class="product-tag">
+                        BEST
+                    </div>
+
+                    <img
+                        src="https://via.placeholder.com/500x500?text=Product+06"
+                        alt="Product 06"
+                    >
+
+                    <button
+                        class="quick-view"
+                        onclick="showDetails(6)"
+                    >
+                        👁 Quick View
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Others
+                    </span>
+
+                    <h3>Product Name Six</h3>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.8)</span>
+                    </div>
+
+                    <div class="price">
+                        <strong>৳ 750</strong>
+                        <del>৳ 950</del>
+                    </div>
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="details-btn"
+                            onclick="showDetails(6)"
+                        >
+                            Product Details
+                        </button>
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyProduct(6)"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY US ================= -->
+
+<section class="why-section" id="about">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <span class="section-label">
+                WHY CHOOSE US
+            </span>
+
+            <h2>
+                Shopping Made Simple
+            </h2>
+
+            <p>
+                We want to make your online shopping experience simple,
+                safe and comfortable.
+            </p>
+
+        </div>
+
+
+        <div class="why-grid">
+
+            <div class="why-card">
+                <div class="why-icon">🚚</div>
+                <h3>Fast Delivery</h3>
+                <p>
+                    Get your order delivered to your doorstep across Bangladesh.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">💰</div>
+                <h3>Best Price</h3>
+                <p>
+                    Quality products at competitive and affordable prices.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">🔐</div>
+                <h3>Secure Shopping</h3>
+                <p>
+                    Your order information is handled with care and security.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">💬</div>
+                <h3>Customer Support</h3>
+                <p>
+                    Contact us whenever you need help with your order.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PAYMENT ================= -->
+
+<section class="payment-section">
+
+    <div class="container payment-box">
+
+        <div>
+            <span class="section-label">
+                EASY PAYMENT
+            </span>
+
+            <h2>
+                Multiple Payment Options
+            </h2>
+
+            <p>
+                Choose your preferred payment method when placing your order.
+            </p>
+        </div>
+
+        <div class="payment-methods">
+
+            <div class="payment-card bkash">
+                <strong>bKash</strong>
+                <span>Mobile Payment</span>
+            </div>
+
+            <div class="payment-card nagad">
+                <strong>Nagad</strong>
+                <span>Mobile Payment</span>
+            </div>
+
+            <div class="payment-card cod">
+                <strong>COD</strong>
+                <span>Cash on Delivery</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact-section" id="contact">
+
+    <div class="container">
+
+        <div class="contact-box">
+
+            <div class="contact-info">
+
+                <span class="section-label">
+                    GET IN TOUCH
+                </span>
+
+                <h2>
+                    Have Any Questions?
+                </h2>
+
+                <p>
+                    Contact us for product information, order support
+                    or any other questions.
+                </p>
+
+                <div class="contact-item">
+                    <span>📞</span>
+                    <div>
+                        <small>Phone</small>
+                        <strong>+880 1XXXXXXXXX</strong>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span>📧</span>
+                    <div>
+                        <small>Email</small>
+                        <strong>support@personalproductbd.com</strong>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span>📍</span>
+                    <div>
+                        <small>Location</small>
+                        <strong>Bangladesh</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <form class="contact-form" onsubmit="sendMessage(event)">
+
+                <input
+                    type="text"
+                    id="contactName"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="tel"
+                    id="contactPhone"
+                    placeholder="Phone Number"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="contactEmail"
+                    placeholder="Email Address"
+                >
+
+                <textarea
+                    id="contactMessage"
+                    rows="5"
+                    placeholder="Write your message..."
+                    required
+                ></textarea>
+
+                <button type="submit" class="primary-btn">
+                    Send Message →
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div class="footer-brand">
+
+            <div class="logo footer-logo">
+                <span>Personal</span>
+                <strong>Product</strong>
+                <small>in BD</small>
+            </div>
+
+            <p>
+                Your simple destination for quality products
+                and easy online shopping in Bangladesh.
+            </p>
+
+            <div class="socials">
+                <a href="#">f</a>
+                <a href="#">in</a>
+                <a href="#">▶</a>
+                <a href="#">◎</a>
+            </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Customer Service</h3>
+
+            <a href="#">Order Tracking</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Return Policy</a>
+            <a href="#">Privacy Policy</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Payment</h3>
+
+            <span>✓ bKash</span>
+            <span>✓ Nagad</span>
+            <span>✓ Cash on Delivery</span>
+            <span>✓ Secure Checkout</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 Personal Product in BD.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- ================= PRODUCT DETAILS MODAL ================= -->
+
+<div class="modal" id="productModal">
+
+    <div class="modal-content">
+
+        <button class="modal-close" onclick="closeModal()">
+            ×
+        </button>
+
+        <div class="modal-product">
+
+            <div class="modal-image">
+                <img
+                    id="modalImage"
+                    src=""
+                    alt="Product"
+                >
+            </div>
+
+            <div class="modal-details">
+
+                <span id="modalCategory" class="product-category">
+                    Category
+                </span>
+
+                <h2 id="modalTitle">
+                    Product Name
+                </h2>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                    <span>Excellent Rating</span>
+                </div>
+
+                <div class="modal-price" id="modalPrice">
+                    ৳ 1,250
+                </div>
+
+                <p id="modalDescription">
+                    This is a premium quality product.
+                    Product details will be updated here.
+                </p>
+
+                <ul class="features-list">
+                    <li>✓ Premium Quality</li>
+                    <li>✓ Easy to Use</li>
+                    <li>✓ Quality Checked</li>
+                    <li>✓ Home Delivery Available</li>
+                </ul>
+
+                <div class="quantity">
+
+                    <button onclick="changeQuantity(-1)">
+                        −
+                    </button>
+
+                    <span id="quantity">
+                        1
+                    </span>
+
+                    <button onclick="changeQuantity(1)">
+                        +
+                    </button>
+
+                </div>
+
+                <button
+                    class="modal-buy"
+                    onclick="modalBuy()"
+                >
+                    🛒 Buy Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CART SIDEBAR ================= -->
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<div class="cart-sidebar" id="cartSidebar">
+
+    <div class="cart-header">
+
+        <h2>🛒 Your Cart</h2>
+
+        <button onclick="closeCart()">
+            ×
+        </button>
+
+    </div>
+
+    <div class="cart-items" id="cartItems">
+
+        <div class="empty-cart">
+            <div>🛒</div>
+            <p>Your cart is empty.</p>
+            <button onclick="closeCart()">
+                Continue Shopping
+            </button>
+        </div>
+
+    </div>
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cartTotal">
+                ৳ 0
+            </strong>
+        </div>
+
+        <button
+            class="checkout-btn"
+            onclick="openCheckout()"
+        >
+            Proceed to Checkout →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CHECKOUT MODAL ================= -->
+
+<div class="modal" id="checkoutModal">
+
+    <div class="modal-content checkout-content">
+
+        <button class="modal-close" onclick="closeCheckout()">
+            ×
+        </button>
+
+        <div class="checkout-header">
+
+            <span class="section-label">
+                CHECKOUT
+            </span>
+
+            <h2>
+                Complete Your Order
+            </h2>
+
+            <p>
+                Enter your delivery information below.
+            </p>
+
+        </div>
+
+
+        <form id="checkoutForm" onsubmit="placeOrder(event)">
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input
+                        type="text"
+                        id="customerName"
+                        required
+                        placeholder="Enter your name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        required
+                        placeholder="01XXXXXXXXX"
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Delivery Address *</label>
+
+                <textarea
+                    id="customerAddress"
+                    required
+                    rows="3"
+                    placeholder="House, Road, Area, District"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>District</label>
+
+                    <select id="customerDistrict">
+
+                        <option value="">
+                            Select District
+                        </option>
+
+                        <option>Dhaka</option>
+                        <option>Chattogram</option>
+                        <option>Sylhet</option>
+                        <option>Rajshahi</option>
+                        <option>Khulna</option>
+                        <option>Barishal</option>
+                        <option>Rangpur</option>
+                        <option>Mymensingh</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Payment Method *</label>
+
+                    <select id="paymentMethod" required>
+
+                        <option value="">
+                            Select Payment
+                        </option>
+
+                        <option value="cod">
+                            Cash on Delivery
+                        </option>
+
+                        <option value="bkash">
+                            bKash
+                        </option>
+
+                        <option value="nagad">
+                            Nagad
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="checkout-summary">
+
+                <span>
+                    Order Total
+                </span>
+
+                <strong id="checkoutTotal">
+                    ৳ 0
+                </strong>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="place-order-btn"
+            >
+                ✓ Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ORDER SUCCESS ================= -->
+
+<div class="success-modal" id="successModal">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>
+            Order Placed Successfully!
+        </h2>
+
+        <p>
+            Thank you for your order.
+            Our team will contact you shortly.
+        </p>
+
+        <div class="order-number">
+            Order ID:
+            <strong id="orderNumber">
+                PPBD-000001
+            </strong>
+        </div>
+
+        <button onclick="closeSuccess()">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
