@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Product in BD - Admin Panel</title>
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+    <div class="brand-icon">P</div>
+    <div>
+      <h2>PERSONAL</h2>
+      <span>PRODUCT IN BD</span>
+    </div>
+  </div>
+
+  <div class="menu-title">MAIN MENU</div>
+
+  <a href="#" class="menu active" onclick="showPage('dashboard')">
+    <span>📊</span> Dashboard
+  </a>
+
+  <a href="#" class="menu" onclick="showPage('products')">
+    <span>📦</span> Products
+  </a>
+
+  <a href="#" class="menu" onclick="showPage('categories')">
+    <span>🗂️</span> Categories
+  </a>
+
+  <a href="#" class="menu" onclick="showPage('orders')">
+    <span>🛒</span> Orders
+  </a>
+
+  <a href="#" class="menu" onclick="showPage('customers')">
+    <span>👥</span> Customers
+  </a>
+
+  <a href="#" class="menu" onclick="showPage('stock')">
+    <span>📋</span> Stock
+  </a>
+
+  <a href="#" class="menu" onclick="showPage('sales')">
+    <span>💰</span> Sales
+  </a>
+
+  <div class="menu-title">SYSTEM</div>
+
+  <a href="#" class="menu">
+    <span>⚙️</span> Settings
+  </a>
+
+  <a href="index.html" class="menu">
+    <span>🌐</span> Visit Website
+  </a>
+
+  <a href="#" class="menu logout" onclick="logout()">
+    <span>🚪</span> Logout
+  </a>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+
+    <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+
+    <div class="page-heading">
+      <h1 id="pageTitle">Dashboard</h1>
+      <p>Welcome to Personal Product in BD Admin Panel</p>
+    </div>
+
+    <div class="top-actions">
+
+      <button class="icon-btn">🔔</button>
+
+      <div class="admin-user">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>Administrator</small>
+        </div>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= DASHBOARD ================= -->
+
+  <section id="dashboard" class="page active-page">
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <div class="stat-icon orange">📦</div>
+        <div>
+          <span>Total Products</span>
+          <h2 id="totalProducts">24</h2>
+          <small>All products</small>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon blue">🛒</div>
+        <div>
+          <span>Total Orders</span>
+          <h2 id="totalOrders">156</h2>
+          <small>All orders</small>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon green">💰</div>
+        <div>
+          <span>Total Sales</span>
+          <h2>৳ 2,85,500</h2>
+          <small>Monthly sales</small>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon purple">👥</div>
+        <div>
+          <span>Customers</span>
+          <h2>98</h2>
+          <small>Registered users</small>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- SECOND STATS -->
+
+    <div class="small-stats">
+
+      <div class="small-card">
+        <span>Pending Orders</span>
+        <strong>18</strong>
+        <b>Waiting</b>
+      </div>
+
+      <div class="small-card">
+        <span>Processing</span>
+        <strong>25</strong>
+        <b>Processing</b>
+      </div>
+
+      <div class="small-card">
+        <span>Delivered</span>
+        <strong>102</strong>
+        <b>Completed</b>
+      </div>
+
+      <div class="small-card danger">
+        <span>Low Stock</span>
+        <strong>7</strong>
+        <b>Need Restock</b>
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD CONTENT -->
+
+    <div class="dashboard-grid">
+
+      <div class="panel">
+
+        <div class="panel-header">
+          <div>
+            <h3>Recent Orders</h3>
+            <p>Latest customer orders</p>
+          </div>
+
+          <button onclick="showPage('orders')" class="view-btn">
+            View All
+          </button>
+        </div>
+
+        <div class="table-container">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>#PP1001</td>
+                <td>Rahim Ahmed</td>
+                <td>৳ 1,250</td>
+                <td>COD</td>
+                <td><span class="status pending">Pending</span></td>
+              </tr>
+
+              <tr>
+                <td>#PP1002</td>
+                <td>Karim Hasan</td>
+                <td>৳ 2,450</td>
+                <td>bKash</td>
+                <td><span class="status confirmed">Confirmed</span></td>
+              </tr>
+
+              <tr>
+                <td>#PP1003</td>
+                <td>Nusrat Jahan</td>
+                <td>৳ 1,890</td>
+                <td>Nagad</td>
+                <td><span class="status shipped">Shipped</span></td>
+              </tr>
+
+              <tr>
+                <td>#PP1004</td>
+                <td>Tanvir Islam</td>
+                <td>৳ 3,200</td>
+                <td>COD</td>
+                <td><span class="status delivered">Delivered</span></td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- CATEGORY BOX -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+          <div>
+            <h3>Categories</h3>
+            <p>Product categories</p>
+          </div>
+        </div>
+
+        <div class="category-list">
+
+          <div class="category-item">
+            <span>🧴</span>
+            <div>
+              <strong>Personal Items</strong>
+              <small>12 Products</small>
+            </div>
+          </div>
+
+          <div class="category-item">
+            <span>👔</span>
+            <div>
+              <strong>Men Items</strong>
+              <small>8 Products</small>
+            </div>
+          </div>
+
+          <div class="category-item">
+            <span>👗</span>
+            <div>
+              <strong>Women Items</strong>
+              <small>14 Products</small>
+            </div>
+          </div>
+
+          <div class="category-item">
+            <span>📱</span>
+            <div>
+              <strong>Gadgets</strong>
+              <small>18 Products</small>
+            </div>
+          </div>
+
+          <div class="category-item">
+            <span>💄</span>
+            <div>
+              <strong>Beauty</strong>
+              <small>9 Products</small>
+            </div>
+          </div>
+
+          <div class="category-item">
+            <span>🏠</span>
+            <div>
+              <strong>Home Items</strong>
+              <small>11 Products</small>
+            </div>
+          </div>
+
+          <div class="category-item">
+            <span>👜</span>
+            <div>
+              <strong>Accessories</strong>
+              <small>16 Products</small>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= PRODUCTS ================= -->
+
+  <section id="products" class="page">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Product Management</h2>
+        <p>Add, edit and manage your products</p>
+      </div>
+
+      <button class="primary-btn" onclick="openProductModal()">
+        + Add New Product
+      </button>
+
+    </div>
+
+
+    <div class="filter-box">
+
+      <input
+        type="text"
+        id="productSearch"
+        placeholder="🔍 Search product..."
+        onkeyup="searchProducts()"
+      >
+
+      <select id="categoryFilter" onchange="filterProducts()">
+        <option value="all">All Categories</option>
+        <option>Personal Items</option>
+        <option>Men Items</option>
+        <option>Women Items</option>
+        <option>Gadgets</option>
+        <option>Beauty</option>
+        <option>Home Items</option>
+        <option>Accessories</option>
+      </select>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="table-container">
+
+        <table id="productTable">
+
+          <thead>
+
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>
+                <div class="product-name">
+                  <div class="product-img">⌚</div>
+                  <div>
+                    <strong>Smart Watch</strong>
+                    <small>SKU: PP001</small>
+                  </div>
+                </div>
+              </td>
+
+              <td>Gadgets</td>
+              <td>৳ 1,850</td>
+              <td>25</td>
+
+              <td>
+                <span class="status delivered">Active</span>
+              </td>
+
+              <td>
+                <button class="action edit">✏️</button>
+                <button class="action delete">🗑️</button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>
+                <div class="product-name">
+                  <div class="product-img">👕</div>
+                  <div>
+                    <strong>Premium T-Shirt</strong>
+                    <small>SKU: PP002</small>
+                  </div>
+                </div>
+              </td>
+
+              <td>Men Items</td>
+              <td>৳ 650</td>
+              <td>42</td>
+
+              <td>
+                <span class="status delivered">Active</span>
+              </td>
+
+              <td>
+                <button class="action edit">✏️</button>
+                <button class="action delete">🗑️</button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>
+                <div class="product-name">
+                  <div class="product-img">👜</div>
+                  <div>
+                    <strong>Fashion Bag</strong>
+                    <small>SKU: PP003</small>
+                  </div>
+                </div>
+              </td>
+
+              <td>Women Items</td>
+              <td>৳ 1,450</td>
+              <td>8</td>
+
+              <td>
+                <span class="status pending">Low Stock</span>
+              </td>
+
+              <td>
+                <button class="action edit">✏️</button>
+                <button class="action delete">🗑️</button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>
+                <div class="product-name">
+                  <div class="product-img">🧴</div>
+                  <div>
+                    <strong>Body Care Set</strong>
+                    <small>SKU: PP004</small>
+                  </div>
+                </div>
+              </td>
+
+              <td>Personal Items</td>
+              <td>৳ 990</td>
+              <td>31</td>
+
+              <td>
+                <span class="status delivered">Active</span>
+              </td>
+
+              <td>
+                <button class="action edit">✏️</button>
+                <button class="action delete">🗑️</button>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= CATEGORIES ================= -->
+
+  <section id="categories" class="page">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Categories</h2>
+        <p>Manage product categories</p>
+      </div>
+
+      <button class="primary-btn" onclick="addCategory()">
+        + Add Category
+      </button>
+
+    </div>
+
+
+    <div class="category-admin-grid">
+
+      <div class="category-admin-card">
+        <span>🧴</span>
+        <h3>Personal Items</h3>
+        <p>12 Products</p>
+        <button>Edit</button>
+      </div>
+
+      <div class="category-admin-card">
+        <span>👔</span>
+        <h3>Men Items</h3>
+        <p>8 Products</p>
+        <button>Edit</button>
+      </div>
+
+      <div class="category-admin-card">
+        <span>👗</span>
+        <h3>Women Items</h3>
+        <p>14 Products</p>
+        <button>Edit</button>
+      </div>
+
+      <div class="category-admin-card">
+        <span>📱</span>
+        <h3>Gadgets</h3>
+        <p>18 Products</p>
+        <button>Edit</button>
+      </div>
+
+      <div class="category-admin-card">
+        <span>💄</span>
+        <h3>Beauty</h3>
+        <p>9 Products</p>
+        <button>Edit</button>
+      </div>
+
+      <div class="category-admin-card">
+        <span>🏠</span>
+        <h3>Home Items</h3>
+        <p>11 Products</p>
+        <button>Edit</button>
+      </div>
+
+      <div class="category-admin-card">
+        <span>👜</span>
+        <h3>Accessories</h3>
+        <p>16 Products</p>
+        <button>Edit</button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= ORDERS ================= -->
+
+  <section id="orders" class="page">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Order Management</h2>
+        <p>Manage customer orders</p>
+      </div>
+
+      <button class="secondary-btn">
+        Export Orders
+      </button>
+
+    </div>
+
+
+    <div class="filter-box">
+
+      <input type="text" placeholder="🔍 Search order or customer...">
+
+      <select>
+        <option>All Status</option>
+        <option>Pending</option>
+        <option>Confirmed</option>
+        <option>Processing</option>
+        <option>Shipped</option>
+        <option>Delivered</option>
+        <option>Cancelled</option>
+      </select>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Phone</th>
+              <th>Amount</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>#PP1001</td>
+              <td>Rahim Ahmed</td>
+              <td>017XXXXXXXX</td>
+              <td>৳ 1,250</td>
+              <td>COD</td>
+              <td>
+                <span class="status pending">Pending</span>
+              </td>
+              <td>
+                <button class="action view">👁️</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>#PP1002</td>
+              <td>Karim Hasan</td>
+              <td>018XXXXXXXX</td>
+              <td>৳ 2,450</td>
+              <td>bKash</td>
+              <td>
+                <span class="status confirmed">Confirmed</span>
+              </td>
+              <td>
+                <button class="action view">👁️</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>#PP1003</td>
+              <td>Nusrat Jahan</td>
+              <td>019XXXXXXXX</td>
+              <td>৳ 1,890</td>
+              <td>Nagad</td>
+              <td>
+                <span class="status shipped">Shipped</span>
+              </td>
+              <td>
+                <button class="action view">👁️</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>#PP1004</td>
+              <td>Tanvir Islam</td>
+              <td>016XXXXXXXX</td>
+              <td>৳ 3,200</td>
+              <td>COD</td>
+              <td>
+                <span class="status delivered">Delivered</span>
+              </td>
+              <td>
+                <button class="action view">👁️</button>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= CUSTOMERS ================= -->
+
+  <section id="customers" class="page">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Customers</h2>
+        <p>Registered customers</p>
+      </div>
+
+    </div>
+
+    <div class="panel">
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Orders</th>
+              <th>Total Spent</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Rahim Ahmed</td>
+              <td>017XXXXXXXX</td>
+              <td>rahim@email.com</td>
+              <td>8</td>
+              <td>৳ 15,800</td>
+              <td>
+                <span class="status delivered">Active</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Karim Hasan</td>
+              <td>018XXXXXXXX</td>
+              <td>karim@email.com</td>
+              <td>5</td>
+              <td>৳ 8,400</td>
+              <td>
+                <span class="status delivered">Active</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= STOCK ================= -->
+
+  <section id="stock" class="page">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Stock Management</h2>
+        <p>Monitor product stock</p>
+      </div>
+
+    </div>
+
+    <div class="stock-grid">
+
+      <div class="stock-card">
+        <span>📦</span>
+        <h3>Total Stock</h3>
+        <strong>1,240</strong>
+      </div>
+
+      <div class="stock-card">
+        <span>⚠️</span>
+        <h3>Low Stock</h3>
+        <strong>7</strong>
+      </div>
+
+      <div class="stock-card">
+        <span>❌</span>
+        <h3>Out of Stock</h3>
+        <strong>3</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= SALES ================= -->
+
+  <section id="sales" class="page">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Sales Report</h2>
+        <p>View your sales performance</p>
+      </div>
+
+    </div>
+
+    <div class="sales-box">
+
+      <div>
+        <span>Today Sales</span>
+        <strong>৳ 18,500</strong>
+      </div>
+
+      <div>
+        <span>This Week</span>
+        <strong>৳ 76,800</strong>
+      </div>
+
+      <div>
+        <span>This Month</span>
+        <strong>৳ 2,85,500</strong>
+      </div>
+
+      <div>
+        <span>Total Sales</span>
+        <strong>৳ 12,45,800</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+
+<!-- ================= PRODUCT MODAL ================= -->
+
+<div class="modal" id="productModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>Add New Product</h2>
+      <button onclick="closeProductModal()">×</button>
+    </div>
+
+    <form onsubmit="saveProduct(event)">
+
+      <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" id="productName" placeholder="Enter product name" required>
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+          <label>Category</label>
+
+          <select id="productCategory" required>
+            <option value="">Select Category</option>
+            <option>Personal Items</option>
+            <option>Men Items</option>
+            <option>Women Items</option>
+            <option>Gadgets</option>
+            <option>Beauty</option>
+            <option>Home Items</option>
+            <option>Accessories</option>
+          </select>
+
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" id="productPrice" placeholder="৳ Price" required>
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+          <label>Stock</label>
+          <input type="number" id="productStock" placeholder="Stock quantity" required>
+        </div>
+
+        <div class="form-group">
+          <label>SKU</label>
+          <input type="text" id="productSku" placeholder="SKU number">
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+        <label>Product Image URL</label>
+        <input type="text" placeholder="https://example.com/image.jpg">
+      </div>
+
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea placeholder="Product description"></textarea>
+      </div>
+
+
+      <button type="submit" class="primary-btn full">
+        Save Product
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script src="admin.js"></script>
+
+</body>
+</html>
