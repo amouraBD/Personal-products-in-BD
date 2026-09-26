@@ -7,139 +7,404 @@
 
     <title>Personal Product in BD</title>
 
-    <meta name="description"
-          content="Personal Product in BD - Quality products at affordable prices with home delivery across Bangladesh.">
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= TOP BAR ================= -->
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
 
-<div class="top-bar">
-    <div class="container top-bar-inner">
-        <span>🇧🇩 Delivery Available All Over Bangladesh</span>
-        <span>📞 Hotline: 01XXXXXXXXX</span>
+<div class="topbar">
+    <div class="container topbar-inner">
+
+        <div>
+            🚚 Free Delivery on Selected Products
+        </div>
+
+        <div class="top-links">
+            <a href="#">Save More on App</a>
+            <a href="#">Customer Care</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Login</a>
+            <a href="#">Sign Up</a>
+        </div>
+
     </div>
 </div>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     MAIN HEADER
+===================================================== -->
 
-<header class="header">
+<header class="main-header">
 
     <div class="container header-inner">
 
-        <a href="#home" class="logo">
+        <!-- LOGO -->
+
+        <a href="#" class="logo">
             <span>Personal</span>
-            <b>Product</b>
+            <strong>Product</strong>
             <small>in BD</small>
         </a>
 
-        <nav class="nav-menu">
-            <a href="#home">Home</a>
-            <a href="#products">Products</a>
-            <a href="#offer">Offer</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#faq">FAQ</a>
-        </nav>
 
-        <button class="cart-button" onclick="openCart()">
-            🛒 Cart
-            <span id="cartCount">0</span>
-        </button>
+        <!-- SEARCH -->
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search in Personal Product in BD..."
+                onkeyup="searchProducts()"
+            >
+
+            <select id="searchCategory">
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="electronics">
+                    Electronics
+                </option>
+
+                <option value="gadgets">
+                    Gadgets
+                </option>
+
+                <option value="lifestyle">
+                    Lifestyle
+                </option>
+
+                <option value="others">
+                    Others
+                </option>
+
+            </select>
+
+            <button onclick="searchProducts()">
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- HEADER ACTIONS -->
+
+        <div class="header-actions">
+
+            <a href="#" class="header-action">
+                👤
+                <span>
+                    Login<br>
+                    <b>Account</b>
+                </span>
+            </a>
+
+            <a href="#" class="header-action">
+                📦
+                <span>
+                    My<br>
+                    <b>Orders</b>
+                </span>
+            </a>
+
+            <button
+                class="cart-header"
+                onclick="openCart()">
+
+                🛒
+
+                <span id="cartCount">
+                    0
+                </span>
+
+            </button>
+
+        </div>
 
     </div>
 
 </header>
 
 
-<!-- ================= HERO LANDING ================= -->
+<!-- =====================================================
+     CATEGORY NAVIGATION
+===================================================== -->
 
-<section class="hero" id="home">
+<nav class="category-nav">
 
-    <div class="hero-background"></div>
+    <div class="container category-nav-inner">
 
-    <div class="container hero-grid">
+        <button
+            class="category-menu"
+            onclick="toggleCategoryMenu()">
 
-        <div class="hero-content">
+            ☰
+            Categories
+            <span>⌄</span>
 
-            <div class="hero-badge">
-                🔥 SPECIAL OFFER — LIMITED TIME
-            </div>
+        </button>
 
-            <h1>
-                Smart Products.
-                <span>Better Life.</span>
-                Better Price.
-            </h1>
 
-            <p class="hero-description">
-                Discover carefully selected products at attractive prices.
-                Easy ordering, secure payment and home delivery across Bangladesh.
-            </p>
+        <div class="category-links">
 
-            <div class="hero-buttons">
+            <a href="#products">
+                Electronics
+            </a>
 
-                <a href="#products" class="btn btn-primary">
-                    🛍️ Shop Now
-                </a>
+            <a href="#products">
+                Gadgets
+            </a>
 
-                <a href="#offer" class="btn btn-outline">
-                    🔥 See Offers
-                </a>
+            <a href="#products">
+                Lifestyle
+            </a>
 
-            </div>
+            <a href="#products">
+                New Arrivals
+            </a>
 
-            <div class="trust-row">
+            <a href="#flash-sale">
+                Flash Sale
+            </a>
 
-                <div class="trust-item">
-                    <strong>🚚</strong>
-                    <span>Home Delivery</span>
-                </div>
-
-                <div class="trust-item">
-                    <strong>💳</strong>
-                    <span>Easy Payment</span>
-                </div>
-
-                <div class="trust-item">
-                    <strong>🔒</strong>
-                    <span>Secure Order</span>
-                </div>
-
-            </div>
+            <a href="#products">
+                Best Deals
+            </a>
 
         </div>
 
+    </div>
 
-        <div class="hero-product">
+</nav>
 
-            <div class="hero-glow"></div>
 
-            <div class="hero-offer">
-                UP TO
-                <strong>30%</strong>
-                OFF
+<!-- =====================================================
+     HERO AREA
+===================================================== -->
+
+<section class="hero-section">
+
+    <div class="container hero-layout">
+
+
+        <!-- LEFT CATEGORY MENU -->
+
+        <aside
+            class="side-category"
+            id="sideCategory">
+
+            <h3>
+                Categories
+            </h3>
+
+            <a href="#">
+                📱 Mobile & Accessories
+                <span>›</span>
+            </a>
+
+            <a href="#">
+                💻 Computer & Technology
+                <span>›</span>
+            </a>
+
+            <a href="#">
+                🎧 Audio & Headphones
+                <span>›</span>
+            </a>
+
+            <a href="#">
+                ⚡ Electronics
+                <span>›</span>
+            </a>
+
+            <a href="#">
+                🏠 Home & Lifestyle
+                <span>›</span>
+            </a>
+
+            <a href="#">
+                🎮 Gaming
+                <span>›</span>
+            </a>
+
+            <a href="#">
+                🎁 Other Products
+                <span>›</span>
+            </a>
+
+            <a href="#" class="all-category">
+                View All Categories →
+            </a>
+
+        </aside>
+
+
+        <!-- MAIN BANNER -->
+
+        <div class="hero-banner">
+
+            <div class="banner-content">
+
+                <span class="banner-small">
+                    PERSONAL PRODUCT IN BD
+                </span>
+
+                <h1>
+                    Discover
+                    <br>
+                    Amazing Products
+                </h1>
+
+                <p>
+                    Great products.
+                    Great prices.
+                    Delivered to your door.
+                </p>
+
+                <div class="banner-price">
+
+                    <span>
+                        Starting From
+                    </span>
+
+                    <strong>
+                        ৳ 499
+                    </strong>
+
+                </div>
+
+                <a
+                    href="#products"
+                    class="shop-now">
+
+                    SHOP NOW →
+
+                </a>
+
             </div>
 
-            <div class="hero-product-image">
+
+            <div class="banner-image">
+
+                <!-- নিজের banner.jpg এখানে বসাবে -->
+
                 <img
-                    src="https://via.placeholder.com/600x600?text=YOUR+PRODUCT"
-                    alt="Featured Product"
+                    src="images/banner.jpg"
+                    alt="Personal Product Banner"
                 >
+
             </div>
 
-            <div class="hero-product-info">
-                <span>FEATURED PRODUCT</span>
-                <h3>Your Product Name</h3>
-                <div>
-                    <strong>৳ 1,490</strong>
-                    <del>৳ 1,990</del>
+
+            <div class="banner-dots">
+
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT QUICK BOX -->
+
+        <aside class="quick-box">
+
+            <div class="quick-user">
+
+                <div class="user-icon">
+                    👤
                 </div>
+
+                <h3>
+                    Welcome!
+                </h3>
+
+                <p>
+                    Login to enjoy
+                    more benefits.
+                </p>
+
+                <button>
+                    LOGIN
+                </button>
+
+                <button class="register-btn">
+                    REGISTER
+                </button>
+
             </div>
 
+
+            <div class="quick-offer">
+
+                <span>
+                    🔥 HOT DEAL
+                </span>
+
+                <strong>
+                    Up to 30% OFF
+                </strong>
+
+                <a href="#flash-sale">
+                    Shop Now →
+                </a>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICE BAR
+===================================================== -->
+
+<section class="service-bar">
+
+    <div class="container service-grid">
+
+        <div>
+            <span>🚚</span>
+            <div>
+                <strong>Free Delivery</strong>
+                <small>Selected Products</small>
+            </div>
+        </div>
+
+        <div>
+            <span>💳</span>
+            <div>
+                <strong>Secure Payment</strong>
+                <small>bKash / Nagad / COD</small>
+            </div>
+        </div>
+
+        <div>
+            <span>🔄</span>
+            <div>
+                <strong>Easy Returns</strong>
+                <small>Customer Support</small>
+            </div>
+        </div>
+
+        <div>
+            <span>✅</span>
+            <div>
+                <strong>Quality Products</strong>
+                <small>Checked Products</small>
+            </div>
         </div>
 
     </div>
@@ -147,83 +412,212 @@
 </section>
 
 
-<!-- ================= QUICK BENEFITS ================= -->
+<!-- =====================================================
+     FLASH SALE
+===================================================== -->
 
-<section class="benefits">
-
-    <div class="container benefits-grid">
-
-        <div class="benefit">
-            <div class="benefit-icon">🚚</div>
-            <div>
-                <h3>Fast Delivery</h3>
-                <p>Delivery across Bangladesh</p>
-            </div>
-        </div>
-
-        <div class="benefit">
-            <div class="benefit-icon">💰</div>
-            <div>
-                <h3>Affordable Price</h3>
-                <p>Quality products, fair price</p>
-            </div>
-        </div>
-
-        <div class="benefit">
-            <div class="benefit-icon">🔐</div>
-            <div>
-                <h3>Secure Shopping</h3>
-                <p>Your information stays protected</p>
-            </div>
-        </div>
-
-        <div class="benefit">
-            <div class="benefit-icon">📞</div>
-            <div>
-                <h3>Customer Support</h3>
-                <p>We're here when you need us</p>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= OFFER ================= -->
-
-<section class="offer-section" id="offer">
+<section
+    class="flash-section"
+    id="flash-sale">
 
     <div class="container">
 
-        <div class="offer-box">
+        <div class="section-top">
 
-            <div class="offer-text">
+            <div class="section-title">
 
-                <span class="small-title">
-                    LIMITED TIME OFFER
+                <span class="flash-icon">
+                    ⚡
                 </span>
 
                 <h2>
-                    Special Discount
-                    <span>For You!</span>
+                    Flash Sale
                 </h2>
 
-                <p>
-                    Order today and enjoy special pricing on selected products.
-                    Don't miss this limited-time offer.
-                </p>
-
-                <a href="#products" class="btn btn-light">
-                    Shop Offers →
-                </a>
+                <span class="ending">
+                    Ending Soon
+                </span>
 
             </div>
 
-            <div class="offer-number">
-                <span>UP TO</span>
-                <strong>30%</strong>
-                <span>OFF</span>
+
+            <div class="countdown">
+
+                <span>
+                    00
+                </span>
+
+                <b>:</b>
+
+                <span>
+                    45
+                </span>
+
+                <b>:</b>
+
+                <span>
+                    32
+                </span>
+
+            </div>
+
+
+            <a
+                href="#products"
+                class="view-all">
+
+                View All
+                →
+
+            </a>
+
+        </div>
+
+
+        <div class="flash-products">
+
+
+            <!-- FLASH PRODUCT 1 -->
+
+            <div class="flash-card">
+
+                <div class="flash-image">
+
+                    <span>
+                        -30%
+                    </span>
+
+                    <img
+                        src="images/product-1.jpg"
+                        alt="Product 1"
+                    >
+
+                </div>
+
+                <h3>
+                    Product Name One
+                </h3>
+
+                <strong>
+                    ৳ 1,250
+                </strong>
+
+                <del>
+                    ৳ 1,800
+                </del>
+
+                <div class="sold">
+                    ▰▰▰▰▱ 68% Sold
+                </div>
+
+            </div>
+
+
+            <!-- FLASH PRODUCT 2 -->
+
+            <div class="flash-card">
+
+                <div class="flash-image">
+
+                    <span>
+                        -25%
+                    </span>
+
+                    <img
+                        src="images/product-2.jpg"
+                        alt="Product 2"
+                    >
+
+                </div>
+
+                <h3>
+                    Product Name Two
+                </h3>
+
+                <strong>
+                    ৳ 1,590
+                </strong>
+
+                <del>
+                    ৳ 2,100
+                </del>
+
+                <div class="sold">
+                    ▰▰▰▱▱ 52% Sold
+                </div>
+
+            </div>
+
+
+            <!-- FLASH PRODUCT 3 -->
+
+            <div class="flash-card">
+
+                <div class="flash-image">
+
+                    <span>
+                        -20%
+                    </span>
+
+                    <img
+                        src="images/product-3.jpg"
+                        alt="Product 3"
+                    >
+
+                </div>
+
+                <h3>
+                    Product Name Three
+                </h3>
+
+                <strong>
+                    ৳ 990
+                </strong>
+
+                <del>
+                    ৳ 1,250
+                </del>
+
+                <div class="sold">
+                    ▰▰▰▰▱ 75% Sold
+                </div>
+
+            </div>
+
+
+            <!-- FLASH PRODUCT 4 -->
+
+            <div class="flash-card">
+
+                <div class="flash-image">
+
+                    <span>
+                        -15%
+                    </span>
+
+                    <img
+                        src="images/product-4.jpg"
+                        alt="Product 4"
+                    >
+
+                </div>
+
+                <h3>
+                    Product Name Four
+                </h3>
+
+                <strong>
+                    ৳ 2,490
+                </strong>
+
+                <del>
+                    ৳ 2,900
+                </del>
+
+                <div class="sold">
+                    ▰▰▰▰▱ 61% Sold
+                </div>
+
             </div>
 
         </div>
@@ -233,136 +627,116 @@
 </section>
 
 
-<!-- ================= PRODUCTS ================= -->
+<!-- =====================================================
+     JUST FOR YOU / PRODUCTS
+===================================================== -->
 
-<section class="products-section" id="products">
+<section
+    class="products-section"
+    id="products">
 
     <div class="container">
 
         <div class="section-heading">
 
             <div>
-                <span class="section-label">
-                    OUR COLLECTION
+
+                <span>
+                    RECOMMENDED FOR YOU
                 </span>
 
                 <h2>
-                    Featured Products
+                    Just For You
                 </h2>
 
-                <p>
-                    Choose your favorite product and order today.
-                </p>
-            </div>
-
-            <div class="search-box">
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search products..."
-                    onkeyup="searchProducts()"
-                >
-                🔍
             </div>
 
         </div>
 
 
-        <!-- CATEGORY -->
-
-        <div class="category-buttons">
-
-            <button
-                class="category-btn active"
-                onclick="filterProducts('all', this)">
-                All
-            </button>
-
-            <button
-                class="category-btn"
-                onclick="filterProducts('electronics', this)">
-                ⚡ Electronics
-            </button>
-
-            <button
-                class="category-btn"
-                onclick="filterProducts('gadget', this)">
-                📱 Gadgets
-            </button>
-
-            <button
-                class="category-btn"
-                onclick="filterProducts('lifestyle', this)">
-                🏠 Lifestyle
-            </button>
-
-        </div>
+        <div
+            class="products-grid"
+            id="productGrid">
 
 
-        <!-- PRODUCT GRID -->
-
-        <div class="product-grid" id="productGrid">
-
-
-            <!-- PRODUCT 01 -->
+            <!-- =================================================
+                 PRODUCT 1
+            ================================================== -->
 
             <article
                 class="product-card"
                 data-category="electronics"
-                data-name="Product One">
+                data-name="Product Name One">
 
-                <div class="product-image">
+                <div class="product-photo">
 
-                    <span class="product-badge">
-                        NEW
+                    <span class="discount">
+                        -17%
                     </span>
 
-                    <img
-                        src="https://via.placeholder.com/600x600?text=PRODUCT+01"
-                        alt="Product One"
-                    >
-
                     <button
-                        class="details-floating"
-                        onclick="showDetails(1)">
-                        👁 Details
+                        class="heart"
+                        onclick="toggleWishlist(this)">
+                        ♡
                     </button>
+
+                    <img
+                        src="images/product-1.jpg"
+                        alt="Product Name One"
+                    >
 
                 </div>
 
-                <div class="product-content">
 
-                    <span class="product-category">
-                        ELECTRONICS
+                <div class="product-info">
+
+                    <span class="category-label">
+                        Electronics
                     </span>
 
                     <h3>
                         Product Name One
                     </h3>
 
-                    <div class="stars">
+                    <div class="rating">
                         ⭐⭐⭐⭐⭐
-                        <span>4.9</span>
+                        <span>
+                            (4.9)
+                        </span>
                     </div>
 
-                    <div class="price-row">
-                        <strong>৳ 1,250</strong>
-                        <del>৳ 1,500</del>
-                        <em>-17%</em>
+                    <div class="product-price">
+
+                        <strong>
+                            ৳ 1,250
+                        </strong>
+
+                        <del>
+                            ৳ 1,500
+                        </del>
+
                     </div>
 
-                    <div class="product-actions">
+                    <div class="delivery">
+                        🚚 Free Delivery
+                    </div>
+
+                    <div class="product-buttons">
 
                         <button
-                            class="details-btn"
-                            onclick="showDetails(1)">
-                            Product Details
+                            onclick="showDetails(1)"
+                            class="details">
+
+                            Details
+
                         </button>
 
                         <button
-                            class="buy-btn"
-                            onclick="buyProduct(1)">
-                            Buy Now
+                            onclick="addToCart(1)"
+                            class="add-cart">
+
+                            🛒 Add
+
                         </button>
 
                     </div>
@@ -372,65 +746,84 @@
             </article>
 
 
-            <!-- PRODUCT 02 -->
+            <!-- =================================================
+                 PRODUCT 2
+            ================================================== -->
 
             <article
                 class="product-card"
-                data-category="gadget"
-                data-name="Product Two">
+                data-category="gadgets"
+                data-name="Product Name Two">
 
-                <div class="product-image">
+                <div class="product-photo">
 
-                    <span class="product-badge sale">
-                        SALE
+                    <span class="discount">
+                        -16%
                     </span>
 
-                    <img
-                        src="https://via.placeholder.com/600x600?text=PRODUCT+02"
-                        alt="Product Two"
-                    >
-
                     <button
-                        class="details-floating"
-                        onclick="showDetails(2)">
-                        👁 Details
+                        class="heart"
+                        onclick="toggleWishlist(this)">
+                        ♡
                     </button>
+
+                    <img
+                        src="images/product-2.jpg"
+                        alt="Product Name Two"
+                    >
 
                 </div>
 
-                <div class="product-content">
 
-                    <span class="product-category">
-                        GADGET
+                <div class="product-info">
+
+                    <span class="category-label">
+                        Gadgets
                     </span>
 
                     <h3>
                         Product Name Two
                     </h3>
 
-                    <div class="stars">
+                    <div class="rating">
                         ⭐⭐⭐⭐⭐
-                        <span>4.8</span>
+                        <span>
+                            (4.8)
+                        </span>
                     </div>
 
-                    <div class="price-row">
-                        <strong>৳ 1,850</strong>
-                        <del>৳ 2,200</del>
-                        <em>-16%</em>
+                    <div class="product-price">
+
+                        <strong>
+                            ৳ 1,850
+                        </strong>
+
+                        <del>
+                            ৳ 2,200
+                        </del>
+
                     </div>
 
-                    <div class="product-actions">
+                    <div class="delivery">
+                        🚚 Free Delivery
+                    </div>
+
+                    <div class="product-buttons">
 
                         <button
-                            class="details-btn"
-                            onclick="showDetails(2)">
-                            Product Details
+                            onclick="showDetails(2)"
+                            class="details">
+
+                            Details
+
                         </button>
 
                         <button
-                            class="buy-btn"
-                            onclick="buyProduct(2)">
-                            Buy Now
+                            onclick="addToCart(2)"
+                            class="add-cart">
+
+                            🛒 Add
+
                         </button>
 
                     </div>
@@ -440,65 +833,84 @@
             </article>
 
 
-            <!-- PRODUCT 03 -->
+            <!-- =================================================
+                 PRODUCT 3
+            ================================================== -->
 
             <article
                 class="product-card"
                 data-category="lifestyle"
-                data-name="Product Three">
+                data-name="Product Name Three">
 
-                <div class="product-image">
+                <div class="product-photo">
 
-                    <span class="product-badge hot">
-                        HOT
+                    <span class="discount">
+                        -21%
                     </span>
 
-                    <img
-                        src="https://via.placeholder.com/600x600?text=PRODUCT+03"
-                        alt="Product Three"
-                    >
-
                     <button
-                        class="details-floating"
-                        onclick="showDetails(3)">
-                        👁 Details
+                        class="heart"
+                        onclick="toggleWishlist(this)">
+                        ♡
                     </button>
+
+                    <img
+                        src="images/product-3.jpg"
+                        alt="Product Name Three"
+                    >
 
                 </div>
 
-                <div class="product-content">
 
-                    <span class="product-category">
-                        LIFESTYLE
+                <div class="product-info">
+
+                    <span class="category-label">
+                        Lifestyle
                     </span>
 
                     <h3>
                         Product Name Three
                     </h3>
 
-                    <div class="stars">
+                    <div class="rating">
                         ⭐⭐⭐⭐⭐
-                        <span>4.9</span>
+                        <span>
+                            (4.9)
+                        </span>
                     </div>
 
-                    <div class="price-row">
-                        <strong>৳ 990</strong>
-                        <del>৳ 1,250</del>
-                        <em>-21%</em>
+                    <div class="product-price">
+
+                        <strong>
+                            ৳ 990
+                        </strong>
+
+                        <del>
+                            ৳ 1,250
+                        </del>
+
                     </div>
 
-                    <div class="product-actions">
+                    <div class="delivery">
+                        🚚 Free Delivery
+                    </div>
+
+                    <div class="product-buttons">
 
                         <button
-                            class="details-btn"
-                            onclick="showDetails(3)">
-                            Product Details
+                            onclick="showDetails(3)"
+                            class="details">
+
+                            Details
+
                         </button>
 
                         <button
-                            class="buy-btn"
-                            onclick="buyProduct(3)">
-                            Buy Now
+                            onclick="addToCart(3)"
+                            class="add-cart">
+
+                            🛒 Add
+
                         </button>
 
                     </div>
@@ -508,65 +920,84 @@
             </article>
 
 
-            <!-- PRODUCT 04 -->
+            <!-- =================================================
+                 PRODUCT 4
+            ================================================== -->
 
             <article
                 class="product-card"
                 data-category="electronics"
-                data-name="Product Four">
+                data-name="Product Name Four">
 
-                <div class="product-image">
+                <div class="product-photo">
 
-                    <span class="product-badge">
-                        BEST
+                    <span class="discount">
+                        -14%
                     </span>
 
-                    <img
-                        src="https://via.placeholder.com/600x600?text=PRODUCT+04"
-                        alt="Product Four"
-                    >
-
                     <button
-                        class="details-floating"
-                        onclick="showDetails(4)">
-                        👁 Details
+                        class="heart"
+                        onclick="toggleWishlist(this)">
+                        ♡
                     </button>
+
+                    <img
+                        src="images/product-4.jpg"
+                        alt="Product Name Four"
+                    >
 
                 </div>
 
-                <div class="product-content">
 
-                    <span class="product-category">
-                        ELECTRONICS
+                <div class="product-info">
+
+                    <span class="category-label">
+                        Electronics
                     </span>
 
                     <h3>
                         Product Name Four
                     </h3>
 
-                    <div class="stars">
+                    <div class="rating">
                         ⭐⭐⭐⭐⭐
-                        <span>4.7</span>
+                        <span>
+                            (4.7)
+                        </span>
                     </div>
 
-                    <div class="price-row">
-                        <strong>৳ 2,490</strong>
-                        <del>৳ 2,900</del>
-                        <em>-14%</em>
+                    <div class="product-price">
+
+                        <strong>
+                            ৳ 2,490
+                        </strong>
+
+                        <del>
+                            ৳ 2,900
+                        </del>
+
                     </div>
 
-                    <div class="product-actions">
+                    <div class="delivery">
+                        🚚 Free Delivery
+                    </div>
+
+                    <div class="product-buttons">
 
                         <button
-                            class="details-btn"
-                            onclick="showDetails(4)">
-                            Product Details
+                            onclick="showDetails(4)"
+                            class="details">
+
+                            Details
+
                         </button>
 
                         <button
-                            class="buy-btn"
-                            onclick="buyProduct(4)">
-                            Buy Now
+                            onclick="addToCart(4)"
+                            class="add-cart">
+
+                            🛒 Add
+
                         </button>
 
                     </div>
@@ -576,65 +1007,84 @@
             </article>
 
 
-            <!-- PRODUCT 05 -->
+            <!-- =================================================
+                 PRODUCT 5
+            ================================================== -->
 
             <article
                 class="product-card"
-                data-category="gadget"
-                data-name="Product Five">
+                data-category="gadgets"
+                data-name="Product Name Five">
 
-                <div class="product-image">
+                <div class="product-photo">
 
-                    <span class="product-badge sale">
+                    <span class="discount">
                         -20%
                     </span>
 
-                    <img
-                        src="https://via.placeholder.com/600x600?text=PRODUCT+05"
-                        alt="Product Five"
-                    >
-
                     <button
-                        class="details-floating"
-                        onclick="showDetails(5)">
-                        👁 Details
+                        class="heart"
+                        onclick="toggleWishlist(this)">
+                        ♡
                     </button>
+
+                    <img
+                        src="images/product-5.jpg"
+                        alt="Product Name Five"
+                    >
 
                 </div>
 
-                <div class="product-content">
 
-                    <span class="product-category">
-                        GADGET
+                <div class="product-info">
+
+                    <span class="category-label">
+                        Gadgets
                     </span>
 
                     <h3>
                         Product Name Five
                     </h3>
 
-                    <div class="stars">
+                    <div class="rating">
                         ⭐⭐⭐⭐⭐
-                        <span>4.9</span>
+                        <span>
+                            (4.9)
+                        </span>
                     </div>
 
-                    <div class="price-row">
-                        <strong>৳ 1,590</strong>
-                        <del>৳ 1,990</del>
-                        <em>-20%</em>
+                    <div class="product-price">
+
+                        <strong>
+                            ৳ 1,590
+                        </strong>
+
+                        <del>
+                            ৳ 1,990
+                        </del>
+
                     </div>
 
-                    <div class="product-actions">
+                    <div class="delivery">
+                        🚚 Free Delivery
+                    </div>
+
+                    <div class="product-buttons">
 
                         <button
-                            class="details-btn"
-                            onclick="showDetails(5)">
-                            Product Details
+                            onclick="showDetails(5)"
+                            class="details">
+
+                            Details
+
                         </button>
 
                         <button
-                            class="buy-btn"
-                            onclick="buyProduct(5)">
-                            Buy Now
+                            onclick="addToCart(5)"
+                            class="add-cart">
+
+                            🛒 Add
+
                         </button>
 
                     </div>
@@ -644,65 +1094,84 @@
             </article>
 
 
-            <!-- PRODUCT 06 -->
+            <!-- =================================================
+                 PRODUCT 6
+            ================================================== -->
 
             <article
                 class="product-card"
                 data-category="lifestyle"
-                data-name="Product Six">
+                data-name="Product Name Six">
 
-                <div class="product-image">
+                <div class="product-photo">
 
-                    <span class="product-badge hot">
-                        POPULAR
+                    <span class="discount">
+                        -21%
                     </span>
 
-                    <img
-                        src="https://via.placeholder.com/600x600?text=PRODUCT+06"
-                        alt="Product Six"
-                    >
-
                     <button
-                        class="details-floating"
-                        onclick="showDetails(6)">
-                        👁 Details
+                        class="heart"
+                        onclick="toggleWishlist(this)">
+                        ♡
                     </button>
+
+                    <img
+                        src="images/product-6.jpg"
+                        alt="Product Name Six"
+                    >
 
                 </div>
 
-                <div class="product-content">
 
-                    <span class="product-category">
-                        LIFESTYLE
+                <div class="product-info">
+
+                    <span class="category-label">
+                        Lifestyle
                     </span>
 
                     <h3>
                         Product Name Six
                     </h3>
 
-                    <div class="stars">
+                    <div class="rating">
                         ⭐⭐⭐⭐⭐
-                        <span>4.8</span>
+                        <span>
+                            (4.8)
+                        </span>
                     </div>
 
-                    <div class="price-row">
-                        <strong>৳ 750</strong>
-                        <del>৳ 950</del>
-                        <em>-21%</em>
+                    <div class="product-price">
+
+                        <strong>
+                            ৳ 750
+                        </strong>
+
+                        <del>
+                            ৳ 950
+                        </del>
+
                     </div>
 
-                    <div class="product-actions">
+                    <div class="delivery">
+                        🚚 Free Delivery
+                    </div>
+
+                    <div class="product-buttons">
 
                         <button
-                            class="details-btn"
-                            onclick="showDetails(6)">
-                            Product Details
+                            onclick="showDetails(6)"
+                            class="details">
+
+                            Details
+
                         </button>
 
                         <button
-                            class="buy-btn"
-                            onclick="buyProduct(6)">
-                            Buy Now
+                            onclick="addToCart(6)"
+                            class="add-cart">
+
+                            🛒 Add
+
                         </button>
 
                     </div>
@@ -718,89 +1187,47 @@
 </section>
 
 
-<!-- ================= HOW TO ORDER ================= -->
+<!-- =====================================================
+     BIG PROMO BANNER
+===================================================== -->
 
-<section class="how-section">
+<section class="promo-section">
 
     <div class="container">
 
-        <div class="section-heading center">
+        <div class="promo-banner">
 
-            <span class="section-label">
-                EASY ORDERING
-            </span>
+            <div>
 
-            <h2>
-                How To Order
-            </h2>
+                <span>
+                    WEEKEND SPECIAL
+                </span>
 
-            <p>
-                Ordering your favorite product is very easy.
-            </p>
-
-        </div>
-
-
-        <div class="steps">
-
-            <div class="step">
-
-                <div class="step-number">01</div>
-
-                <div class="step-icon">🛍️</div>
-
-                <h3>Choose Product</h3>
+                <h2>
+                    Upgrade Your Everyday
+                    <br>
+                    Shopping Experience
+                </h2>
 
                 <p>
-                    Select your favorite product from our collection.
+                    Discover selected products at special prices.
                 </p>
+
+                <a
+                    href="#products"
+                    class="promo-button">
+
+                    SHOP NOW →
+
+                </a>
 
             </div>
 
 
-            <div class="step">
-
-                <div class="step-number">02</div>
-
-                <div class="step-icon">📝</div>
-
-                <h3>Place Order</h3>
-
-                <p>
-                    Enter your name, phone and delivery address.
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">03</div>
-
-                <div class="step-icon">💳</div>
-
-                <h3>Choose Payment</h3>
-
-                <p>
-                    Pay using bKash, Nagad or Cash on Delivery.
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">04</div>
-
-                <div class="step-icon">🚚</div>
-
-                <h3>Receive Product</h3>
-
-                <p>
-                    Receive your order at your doorstep.
-                </p>
-
-            </div>
+            <img
+                src="images/banner-2.jpg"
+                alt="Special Offer"
+            >
 
         </div>
 
@@ -809,47 +1236,76 @@
 </section>
 
 
-<!-- ================= PAYMENT ================= -->
+<!-- =====================================================
+     PAYMENT SECTION
+===================================================== -->
 
 <section class="payment-section">
 
     <div class="container">
 
-        <div class="payment-inner">
+        <div class="payment-title">
 
-            <div>
+            <span>
+                EASY & SECURE PAYMENT
+            </span>
 
-                <span class="section-label">
-                    EASY PAYMENT
-                </span>
+            <h2>
+                Pay Your Way
+            </h2>
 
-                <h2>
-                    Choose Your Payment Method
-                </h2>
+        </div>
+
+
+        <div class="payment-grid">
+
+            <div class="payment-card">
+
+                <div class="payment-logo bkash">
+                    bKash
+                </div>
+
+                <h3>
+                    bKash
+                </h3>
 
                 <p>
-                    We support convenient payment options for customers
-                    across Bangladesh.
+                    Pay securely using bKash.
                 </p>
 
             </div>
 
-            <div class="payment-methods">
 
-                <div class="payment-method bkash">
-                    <strong>bKash</strong>
-                    <span>Mobile Payment</span>
+            <div class="payment-card">
+
+                <div class="payment-logo nagad">
+                    Nagad
                 </div>
 
-                <div class="payment-method nagad">
-                    <strong>Nagad</strong>
-                    <span>Mobile Payment</span>
+                <h3>
+                    Nagad
+                </h3>
+
+                <p>
+                    Pay securely using Nagad.
+                </p>
+
+            </div>
+
+
+            <div class="payment-card">
+
+                <div class="payment-logo cod">
+                    COD
                 </div>
 
-                <div class="payment-method cod">
-                    <strong>COD</strong>
-                    <span>Cash on Delivery</span>
-                </div>
+                <h3>
+                    Cash on Delivery
+                </h3>
+
+                <p>
+                    Pay when your product arrives.
+                </p>
 
             </div>
 
@@ -860,30 +1316,28 @@
 </section>
 
 
-<!-- ================= REVIEWS ================= -->
+<!-- =====================================================
+     REVIEWS
+===================================================== -->
 
-<section class="reviews-section" id="reviews">
+<section class="reviews-section">
 
     <div class="container">
 
         <div class="section-heading center">
 
-            <span class="section-label">
-                CUSTOMER REVIEWS
+            <span>
+                CUSTOMER FEEDBACK
             </span>
 
             <h2>
-                What Our Customers Say
+                What Customers Say
             </h2>
-
-            <p>
-                Real customer feedback will appear here.
-            </p>
 
         </div>
 
 
-        <div class="review-grid">
+        <div class="reviews-grid">
 
             <div class="review-card">
 
@@ -892,17 +1346,13 @@
                 </div>
 
                 <p>
-                    “Product quality was very good and delivery was quick.
-                    I am happy with my purchase.”
+                    “Product quality was very good and
+                    delivery was fast.”
                 </p>
 
-                <div class="review-user">
-                    <div class="avatar">R</div>
-                    <div>
-                        <strong>Rahim</strong>
-                        <span>Dhaka</span>
-                    </div>
-                </div>
+                <strong>
+                    — Customer, Dhaka
+                </strong>
 
             </div>
 
@@ -914,17 +1364,13 @@
                 </div>
 
                 <p>
-                    “The ordering process was very easy.
+                    “Very easy ordering process.
                     Product arrived safely.”
                 </p>
 
-                <div class="review-user">
-                    <div class="avatar">S</div>
-                    <div>
-                        <strong>Sumaiya</strong>
-                        <span>Chattogram</span>
-                    </div>
-                </div>
+                <strong>
+                    — Customer, Chattogram
+                </strong>
 
             </div>
 
@@ -936,17 +1382,13 @@
                 </div>
 
                 <p>
-                    “Good service and reasonable price.
-                    I would order again.”
+                    “Good price and nice service.
+                    I will order again.”
                 </p>
 
-                <div class="review-user">
-                    <div class="avatar">A</div>
-                    <div>
-                        <strong>Arif</strong>
-                        <span>Sylhet</span>
-                    </div>
-                </div>
+                <strong>
+                    — Customer, Sylhet
+                </strong>
 
             </div>
 
@@ -957,173 +1399,93 @@
 </section>
 
 
-<!-- ================= FAQ ================= -->
-
-<section class="faq-section" id="faq">
-
-    <div class="container">
-
-        <div class="section-heading center">
-
-            <span class="section-label">
-                FAQ
-            </span>
-
-            <h2>
-                Frequently Asked Questions
-            </h2>
-
-        </div>
-
-
-        <div class="faq-list">
-
-            <details>
-                <summary>
-                    How can I place an order?
-                    <span>+</span>
-                </summary>
-
-                <p>
-                    Select a product, click Buy Now and provide
-                    your delivery information.
-                </p>
-            </details>
-
-
-            <details>
-                <summary>
-                    Do you provide Cash on Delivery?
-                    <span>+</span>
-                </summary>
-
-                <p>
-                    Yes, Cash on Delivery is available where applicable.
-                </p>
-            </details>
-
-
-            <details>
-                <summary>
-                    Do you support bKash and Nagad?
-                    <span>+</span>
-                </summary>
-
-                <p>
-                    Yes. bKash and Nagad payment options can be selected
-                    during checkout.
-                </p>
-            </details>
-
-
-            <details>
-                <summary>
-                    Where do you deliver?
-                    <span>+</span>
-                </summary>
-
-                <p>
-                    Delivery can be arranged across Bangladesh.
-                </p>
-            </details>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= FINAL CTA ================= -->
-
-<section class="final-cta">
-
-    <div class="container">
-
-        <div class="cta-content">
-
-            <span>
-                READY TO SHOP?
-            </span>
-
-            <h2>
-                Find Something You’ll Love.
-            </h2>
-
-            <p>
-                Browse our products and place your order today.
-            </p>
-
-            <a href="#products" class="btn btn-light">
-                🛍️ Shop Now
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer class="footer">
 
     <div class="container footer-grid">
 
-        <div class="footer-about">
+        <div class="footer-brand">
 
-            <a href="#home" class="logo footer-logo">
+            <a href="#" class="logo">
                 <span>Personal</span>
-                <b>Product</b>
+                <strong>Product</strong>
                 <small>in BD</small>
             </a>
 
             <p>
-                Your online destination for quality products,
-                attractive prices and convenient shopping in Bangladesh.
+                Your trusted online shopping destination
+                in Bangladesh.
             </p>
 
-            <div class="social-links">
-                <a href="#">f</a>
-                <a href="#">▶</a>
-                <a href="#">◎</a>
-            </div>
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Customer Service
+            </h3>
+
+            <a href="#">
+                Contact Us
+            </a>
+
+            <a href="#">
+                Delivery Information
+            </a>
+
+            <a href="#">
+                Return Policy
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
 
         </div>
 
 
         <div class="footer-column">
 
-            <h3>Quick Links</h3>
+            <h3>
+                Payment
+            </h3>
 
-            <a href="#home">Home</a>
-            <a href="#products">Products</a>
-            <a href="#offer">Offers</a>
-            <a href="#reviews">Reviews</a>
+            <span>
+                ✓ bKash
+            </span>
 
-        </div>
+            <span>
+                ✓ Nagad
+            </span>
 
-
-        <div class="footer-column">
-
-            <h3>Customer</h3>
-
-            <a href="#">Order Tracking</a>
-            <a href="#">Delivery Policy</a>
-            <a href="#">Return Policy</a>
-            <a href="#">Privacy Policy</a>
+            <span>
+                ✓ Cash on Delivery
+            </span>
 
         </div>
 
 
         <div class="footer-column">
 
-            <h3>Contact</h3>
+            <h3>
+                Contact
+            </h3>
 
-            <span>📞 01XXXXXXXXX</span>
-            <span>📧 support@example.com</span>
-            <span>📍 Bangladesh</span>
+            <span>
+                📞 01XXXXXXXXX
+            </span>
+
+            <span>
+                📧 support@personalproductbd.com
+            </span>
+
+            <span>
+                📍 Bangladesh
+            </span>
 
         </div>
 
@@ -1140,19 +1502,28 @@
 </footer>
 
 
-<!-- ================= PRODUCT DETAILS MODAL ================= -->
+<!-- =====================================================
+     PRODUCT DETAILS MODAL
+===================================================== -->
 
-<div class="modal" id="productModal">
+<div
+    class="modal"
+    id="productModal">
 
-    <div class="modal-box">
+    <div class="modal-content">
 
-        <button class="modal-close" onclick="closeDetails()">
+        <button
+            class="modal-close"
+            onclick="closeDetails()">
+
             ×
+
         </button>
 
-        <div class="modal-grid">
 
-            <div class="modal-image">
+        <div class="modal-product">
+
+            <div class="modal-photo">
 
                 <img
                     id="modalImage"
@@ -1161,6 +1532,7 @@
                 >
 
             </div>
+
 
             <div class="modal-info">
 
@@ -1172,8 +1544,9 @@
                     Product Name
                 </h2>
 
-                <div class="modal-stars">
+                <div class="modal-rating">
                     ⭐⭐⭐⭐⭐
+                    <span>4.9</span>
                 </div>
 
                 <div class="modal-price">
@@ -1183,20 +1556,24 @@
                 </div>
 
                 <p id="modalDescription">
-                    Product description will appear here.
+                    Product description goes here.
                 </p>
 
-                <ul>
-                    <li>✓ Premium Quality</li>
-                    <li>✓ Quality Checked</li>
-                    <li>✓ Home Delivery Available</li>
-                    <li>✓ Easy Payment Options</li>
-                </ul>
+                <div class="features">
+
+                    <span>✓ Quality Checked</span>
+                    <span>✓ Home Delivery</span>
+                    <span>✓ Secure Payment</span>
+                    <span>✓ Customer Support</span>
+
+                </div>
 
                 <button
-                    class="btn btn-primary full"
+                    class="modal-buy"
                     onclick="modalBuy()">
+
                     🛒 Buy Now
+
                 </button>
 
             </div>
@@ -1208,181 +1585,25 @@
 </div>
 
 
-<!-- ================= CHECKOUT MODAL ================= -->
+<!-- =====================================================
+     CART SIDEBAR
+===================================================== -->
 
-<div class="modal" id="checkoutModal">
-
-    <div class="modal-box checkout-box">
-
-        <button class="modal-close" onclick="closeCheckout()">
-            ×
-        </button>
-
-        <div class="checkout-heading">
-
-            <span class="section-label">
-                CHECKOUT
-            </span>
-
-            <h2>
-                Complete Your Order
-            </h2>
-
-            <p>
-                Please provide your delivery information.
-            </p>
-
-        </div>
-
-
-        <form id="checkoutForm" onsubmit="placeOrder(event)">
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Full Name *
-                    </label>
-
-                    <input
-                        id="customerName"
-                        type="text"
-                        placeholder="Your full name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Phone Number *
-                    </label>
-
-                    <input
-                        id="customerPhone"
-                        type="tel"
-                        placeholder="01XXXXXXXXX"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Delivery Address *
-                </label>
-
-                <textarea
-                    id="customerAddress"
-                    rows="3"
-                    placeholder="House, Road, Area..."
-                    required></textarea>
-
-            </div>
-
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        District *
-                    </label>
-
-                    <select id="customerDistrict" required>
-
-                        <option value="">
-                            Select District
-                        </option>
-
-                        <option>Dhaka</option>
-                        <option>Chattogram</option>
-                        <option>Sylhet</option>
-                        <option>Rajshahi</option>
-                        <option>Khulna</option>
-                        <option>Barishal</option>
-                        <option>Rangpur</option>
-                        <option>Mymensingh</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Payment Method *
-                    </label>
-
-                    <select id="paymentMethod" required>
-
-                        <option value="">
-                            Select Payment
-                        </option>
-
-                        <option value="COD">
-                            Cash on Delivery
-                        </option>
-
-                        <option value="bKash">
-                            bKash
-                        </option>
-
-                        <option value="Nagad">
-                            Nagad
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <div class="order-total">
-
-                <span>
-                    Total Amount
-                </span>
-
-                <strong id="checkoutTotal">
-                    ৳ 0
-                </strong>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="btn btn-primary full">
-                ✓ Place Order
-            </button>
-
-        </form>
-
-    </div>
-
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+    onclick="closeCart()">
 </div>
 
 
-<!-- ================= CART ================= -->
-
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-
-<aside class="cart-sidebar" id="cartSidebar">
+<aside
+    class="cart-sidebar"
+    id="cartSidebar">
 
     <div class="cart-header">
 
         <h2>
-            🛒 Your Cart
+            🛒 Shopping Cart
         </h2>
 
         <button onclick="closeCart()">
@@ -1392,12 +1613,24 @@
     </div>
 
 
-    <div id="cartItems" class="cart-items">
+    <div
+        class="cart-items"
+        id="cartItems">
 
         <div class="empty-cart">
-            <div>🛒</div>
-            <h3>Your cart is empty</h3>
-            <p>Add products to continue.</p>
+
+            <div>
+                🛒
+            </div>
+
+            <h3>
+                Your cart is empty
+            </h3>
+
+            <p>
+                Add products to your cart.
+            </p>
+
         </div>
 
     </div>
@@ -1418,9 +1651,11 @@
         </div>
 
         <button
-            class="btn btn-primary full"
+            class="checkout-button"
             onclick="openCheckout()">
+
             Proceed to Checkout →
+
         </button>
 
     </div>
@@ -1428,9 +1663,139 @@
 </aside>
 
 
-<!-- ================= SUCCESS ================= -->
+<!-- =====================================================
+     CHECKOUT
+===================================================== -->
 
-<div class="success-modal" id="successModal">
+<div
+    class="modal"
+    id="checkoutModal">
+
+    <div class="modal-content checkout">
+
+        <button
+            class="modal-close"
+            onclick="closeCheckout()">
+
+            ×
+
+        </button>
+
+
+        <div class="checkout-title">
+
+            <span>
+                ORDER CHECKOUT
+            </span>
+
+            <h2>
+                Complete Your Order
+            </h2>
+
+        </div>
+
+
+        <form
+            id="checkoutForm"
+            onsubmit="placeOrder(event)">
+
+
+            <label>
+                Full Name *
+            </label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your full name"
+                required
+            >
+
+
+            <label>
+                Phone Number *
+            </label>
+
+            <input
+                type="tel"
+                id="customerPhone"
+                placeholder="01XXXXXXXXX"
+                required
+            >
+
+
+            <label>
+                Delivery Address *
+            </label>
+
+            <textarea
+                id="customerAddress"
+                placeholder="House, Road, Area, District"
+                required></textarea>
+
+
+            <label>
+                Payment Method *
+            </label>
+
+            <select
+                id="paymentMethod"
+                required>
+
+                <option value="">
+                    Select Payment Method
+                </option>
+
+                <option value="COD">
+                    Cash on Delivery
+                </option>
+
+                <option value="bKash">
+                    bKash
+                </option>
+
+                <option value="Nagad">
+                    Nagad
+                </option>
+
+            </select>
+
+
+            <div class="checkout-total">
+
+                <span>
+                    Order Total
+                </span>
+
+                <strong id="checkoutTotal">
+                    ৳ 0
+                </strong>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="place-order">
+
+                ✓ PLACE ORDER
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SUCCESS
+===================================================== -->
+
+<div
+    class="success-modal"
+    id="successModal">
 
     <div class="success-box">
 
@@ -1439,17 +1804,17 @@
         </div>
 
         <h2>
-            Order Confirmed!
+            Order Successful!
         </h2>
 
         <p>
-            Thank you for your order.
-            We will contact you shortly.
+            Thank you for shopping with us.
         </p>
 
-        <div class="order-id">
+        <div class="order-number">
 
             Order ID:
+
             <strong id="orderNumber">
                 PPBD-000001
             </strong>
@@ -1457,9 +1822,10 @@
         </div>
 
         <button
-            class="btn btn-primary"
             onclick="closeSuccess()">
+
             Continue Shopping
+
         </button>
 
     </div>
@@ -1467,15 +1833,9 @@
 </div>
 
 
-<!-- ================= FLOATING CONTACT ================= -->
-
-<a
-    href="tel:01XXXXXXXXX"
-    class="floating-contact"
-    title="Call Us">
-    📞
-</a>
-
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script src="script.js"></script>
 
