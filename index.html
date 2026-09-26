@@ -1,947 +1,2071 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Product in BD - Admin Panel</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        body {
-            background: #f5f6fa;
-            color: #222;
-        }
-
-        /* ================= SIDEBAR ================= */
-
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 250px;
-            height: 100vh;
-            background: #111827;
-            color: white;
-            padding: 20px 15px;
-            overflow-y: auto;
-        }
-
-        .logo {
-            text-align: center;
-            padding: 10px 5px 25px;
-            border-bottom: 1px solid #374151;
-            margin-bottom: 20px;
-        }
-
-        .logo h2 {
-            color: #fff;
-            font-size: 22px;
-        }
-
-        .logo span {
-            color: #ff6b00;
-        }
-
-        .logo small {
-            display: block;
-            color: #9ca3af;
-            margin-top: 5px;
-        }
-
-        .menu-title {
-            color: #6b7280;
-            font-size: 12px;
-            margin: 20px 10px 8px;
-            text-transform: uppercase;
-        }
-
-        .menu a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 13px 14px;
-            color: #d1d5db;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 5px;
-            transition: .3s;
-            cursor: pointer;
-        }
-
-        .menu a:hover,
-        .menu a.active {
-            background: #ff6b00;
-            color: white;
-        }
-
-        .menu-icon {
-            width: 22px;
-            text-align: center;
-        }
-
-        /* ================= MAIN ================= */
-
-        .main {
-            margin-left: 250px;
-            min-height: 100vh;
-        }
-
-        /* TOPBAR */
-
-        .topbar {
-            height: 70px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .page-title h2 {
-            font-size: 22px;
-        }
-
-        .page-title p {
-            color: #888;
-            font-size: 13px;
-            margin-top: 4px;
-        }
-
-        .admin-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .admin-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #ff6b00;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        /* CONTENT */
-
-        .content {
-            padding: 30px;
-        }
-
-        /* ================= CARDS ================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 22px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .stat-card h4 {
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .stat-card h2 {
-            font-size: 25px;
-        }
-
-        .stat-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
-            background: #fff1e8;
-            color: #ff6b00;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        /* ================= SECTION ================= */
-
-        .section {
-            background: white;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-
-        .section-header {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #eee;
-        }
-
-        .section-header h3 {
-            font-size: 18px;
-        }
-
-        .btn {
-            border: none;
-            padding: 10px 16px;
-            border-radius: 7px;
-            background: #ff6b00;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: #e85e00;
-        }
-
-        /* ================= PRODUCTS ================= */
-
-        .products {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        .product {
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            overflow: hidden;
-            background: white;
-        }
-
-        .product-img {
-            height: 160px;
-            background: #f3f4f6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 55px;
-        }
-
-        .product-info {
-            padding: 14px;
-        }
-
-        .product-info h4 {
-            margin-bottom: 7px;
-        }
-
-        .category {
-            color: #ff6b00;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .price {
-            font-size: 17px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
-
-        .stock {
-            color: #16a34a;
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        /* ================= TABLE ================= */
-
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 15px 20px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-
-        th {
-            background: #f9fafb;
-            color: #555;
-        }
-
-        .status {
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .pending {
-            background: #fff7ed;
-            color: #ea580c;
-        }
-
-        .confirmed {
-            background: #ecfdf5;
-            color: #059669;
-        }
-
-        .cancelled {
-            background: #fef2f2;
-            color: #dc2626;
-        }
-
-        /* ================= CATEGORIES ================= */
-
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .category-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-            text-align: center;
-        }
-
-        .category-card .icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
-
-        .category-card h3 {
-            margin-bottom: 5px;
-        }
-
-        .category-card p {
-            color: #777;
-            font-size: 13px;
-        }
-
-        /* ================= MOBILE ================= */
-
-        .mobile-menu {
-            display: none;
-            font-size: 25px;
-            cursor: pointer;
-        }
-
-        @media(max-width:1100px) {
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .categories {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media(max-width:700px) {
-
-            .sidebar {
-                transform: translateX(-100%);
-                transition: .3s;
-                z-index: 100;
-            }
-
-            .sidebar.show {
-                transform: translateX(0);
-            }
-
-            .main {
-                margin-left: 0;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .content {
-                padding: 15px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .products {
-                grid-template-columns: 1fr;
-            }
-
-            .categories {
-                grid-template-columns: 1fr;
-            }
-
-            .topbar {
-                padding: 0 15px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Personal Product in BD</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#222;
+}
+
+/* ================= HEADER ================= */
+
+.top-header{
+    background:#ffffff;
+    border-bottom:1px solid #eee;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.header{
+    max-width:1250px;
+    margin:auto;
+    height:75px;
+    display:flex;
+    align-items:center;
+    gap:25px;
+    padding:0 20px;
+}
+
+/* LOGO */
+
+.logo{
+    text-decoration:none;
+    white-space:nowrap;
+}
+
+.logo .personal{
+    color:#ff5a00;
+    font-size:23px;
+    font-weight:800;
+}
+
+.logo .bd{
+    color:#111827;
+    font-size:23px;
+    font-weight:800;
+}
+
+.logo small{
+    display:block;
+    color:#777;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+/* SEARCH */
+
+.search-box{
+    flex:1;
+    display:flex;
+    height:45px;
+}
+
+.search-box input{
+    flex:1;
+    border:1px solid #ddd;
+    border-right:none;
+    border-radius:6px 0 0 6px;
+    padding:0 15px;
+    font-size:14px;
+    outline:none;
+}
+
+.search-box button{
+    width:55px;
+    border:none;
+    background:#ff5a00;
+    color:white;
+    border-radius:0 6px 6px 0;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* HEADER ICONS */
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.header-action{
+    text-align:center;
+    cursor:pointer;
+    color:#333;
+    font-size:13px;
+}
+
+.header-action span{
+    display:block;
+    font-size:22px;
+    margin-bottom:2px;
+}
+
+/* ================= NAV ================= */
+
+.nav{
+    background:white;
+    border-top:1px solid #eee;
+}
+
+.nav-inner{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    overflow-x:auto;
+}
+
+.nav a{
+    padding:15px 18px;
+    color:#333;
+    text-decoration:none;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+.nav a:hover{
+    color:#ff5a00;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    max-width:1250px;
+    margin:20px auto;
+    padding:0 20px;
+}
+
+.hero-box{
+    min-height:360px;
+    border-radius:12px;
+    overflow:hidden;
+    background:
+        linear-gradient(90deg,#111827 0%,#243244 50%,#ff5a00 100%);
+    display:flex;
+    align-items:center;
+    position:relative;
+}
+
+.hero-content{
+    width:55%;
+    padding:50px;
+    color:white;
+    z-index:2;
+}
+
+.hero-content .small{
+    color:#ffb080;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.hero-content h1{
+    font-size:45px;
+    line-height:1.1;
+    margin-bottom:15px;
+}
+
+.hero-content p{
+    color:#ddd;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.shop-btn{
+    display:inline-block;
+    background:#ff5a00;
+    color:white;
+    padding:13px 25px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.hero-products{
+    position:absolute;
+    right:50px;
+    bottom:0;
+    width:390px;
+    height:300px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-circle{
+    width:280px;
+    height:280px;
+    background:rgba(255,255,255,.12);
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:120px;
+}
+
+/* ================= SECTION ================= */
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:0 20px;
+}
+
+.section{
+    margin:30px 0;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    font-size:23px;
+}
+
+.view-all{
+    color:#ff5a00;
+    text-decoration:none;
+    font-size:14px;
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:15px;
+}
+
+.category{
+    background:white;
+    border-radius:10px;
+    padding:20px 10px;
+    text-align:center;
+    cursor:pointer;
+    border:1px solid #eee;
+    transition:.25s;
+}
+
+.category:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.category-icon{
+    width:65px;
+    height:65px;
+    margin:auto;
+    background:#fff1e9;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.category h3{
+    font-size:13px;
+}
+
+.category p{
+    color:#888;
+    font-size:11px;
+    margin-top:5px;
+}
+
+/* ================= FLASH SALE ================= */
+
+.flash{
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.flash-head{
+    background:#ff5a00;
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.flash-head h2{
+    font-size:20px;
+}
+
+.timer{
+    background:#111827;
+    padding:7px 12px;
+    border-radius:5px;
+    font-size:13px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.product{
+    background:white;
+    border-radius:9px;
+    overflow:hidden;
+    border:1px solid #eee;
+    position:relative;
+    transition:.25s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.discount{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#ff5a00;
+    color:white;
+    padding:5px 7px;
+    border-radius:4px;
+    font-size:11px;
+}
+
+.product-image{
+    height:190px;
+    background:#f7f7f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:75px;
+}
+
+.product-info{
+    padding:13px;
+}
+
+.product-name{
+    font-size:14px;
+    line-height:1.4;
+    height:40px;
+    overflow:hidden;
+}
+
+.rating{
+    color:#ff9800;
+    font-size:12px;
+    margin:7px 0;
+}
+
+.price{
+    color:#ff5a00;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.old-price{
+    color:#999;
+    font-size:12px;
+    text-decoration:line-through;
+    margin-left:5px;
+}
+
+.buy-row{
+    display:flex;
+    gap:7px;
+    margin-top:10px;
+}
+
+.add-cart,
+.buy-now{
+    flex:1;
+    border:none;
+    padding:9px 5px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.add-cart{
+    background:#fff0e8;
+    color:#ff5a00;
+}
+
+.buy-now{
+    background:#ff5a00;
+    color:white;
+}
+
+/* ================= FEATURE ================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.feature{
+    background:white;
+    padding:22px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.feature-icon{
+    font-size:30px;
+}
+
+.feature h3{
+    font-size:14px;
+}
+
+.feature p{
+    color:#888;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* ================= CART ================= */
+
+.cart-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:none;
+    z-index:2000;
+}
+
+.cart{
+    position:absolute;
+    right:0;
+    top:0;
+    height:100%;
+    width:390px;
+    background:white;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:15px;
+    border-bottom:1px solid #eee;
+}
+
+.close{
+    font-size:25px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cart-img{
+    width:65px;
+    height:65px;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    border-radius:6px;
+}
+
+.cart-item h4{
+    font-size:13px;
+}
+
+.cart-price{
+    color:#ff5a00;
+    font-weight:bold;
+    margin-top:6px;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    font-size:19px;
+    font-weight:bold;
+}
+
+.checkout{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:none;
+    background:#ff5a00;
+    color:white;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#111827;
+    color:white;
+    margin-top:50px;
+}
+
+.footer{
+    max-width:1250px;
+    margin:auto;
+    padding:45px 20px 25px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:30px;
+}
+
+.footer h2{
+    margin-bottom:12px;
+}
+
+.footer h2 span{
+    color:#ff5a00;
+}
+
+.footer p{
+    color:#aaa;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.footer h3{
+    margin-bottom:15px;
+}
+
+.footer a{
+    display:block;
+    color:#aaa;
+    text-decoration:none;
+    margin-bottom:9px;
+    font-size:13px;
+}
+
+.footer a:hover{
+    color:white;
+}
+
+.copyright{
+    text-align:center;
+    border-top:1px solid #293241;
+    padding:18px;
+    color:#999;
+    font-size:12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+
+    .categories{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .hero-products{
+        opacity:.4;
+    }
+}
+
+@media(max-width:800px){
+
+    .header{
+        flex-wrap:wrap;
+        height:auto;
+        padding:12px 15px;
+    }
+
+    .search-box{
+        order:3;
+        flex-basis:100%;
+    }
+
+    .header-actions{
+        margin-left:auto;
+    }
+
+    .hero-content{
+        width:100%;
+        padding:35px;
+    }
+
+    .hero-content h1{
+        font-size:35px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:550px){
+
+    .logo .personal,
+    .logo .bd{
+        font-size:18px;
+    }
+
+    .header-action div{
+        display:none;
+    }
+
+    .hero-box{
+        min-height:330px;
+    }
+
+    .hero-content{
+        padding:25px;
+    }
+
+    .hero-content h1{
+        font-size:29px;
+    }
+
+    .hero-products{
+        display:none;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .product-image{
+        height:150px;
+        font-size:55px;
+    }
+
+    .buy-row{
+        flex-direction:column;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .footer{
+        grid-template-columns:1fr;
+    }
+
+    .cart{
+        width:100%;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= SIDEBAR ================= -->
 
-<aside class="sidebar" id="sidebar">
+<!-- ================= HEADER ================= -->
 
-    <div class="logo">
-        <h2>Personal Product <span>in BD</span></h2>
-        <small>Admin Panel</small>
-    </div>
+<header class="top-header">
 
-    <div class="menu">
+<div class="header">
 
-        <div class="menu-title">Main</div>
+<a href="#" class="logo">
 
-        <a class="active" onclick="showPage('dashboard')">
-            <span class="menu-icon">🏠</span>
-            Dashboard
-        </a>
+    <span class="personal">PERSONAL PRODUCT</span>
+    <span class="bd"> IN BD</span>
 
-        <a onclick="showPage('products')">
-            <span class="menu-icon">📦</span>
-            Products
-        </a>
+    <small>YOUR PERSONAL SHOPPING STORE</small>
 
-        <a onclick="showPage('orders')">
-            <span class="menu-icon">🛒</span>
-            Orders
-        </a>
+</a>
 
-        <a onclick="showPage('customers')">
-            <span class="menu-icon">👥</span>
-            Customers
-        </a>
 
-        <div class="menu-title">Product Category</div>
+<div class="search-box">
 
-        <a onclick="filterProducts('Personal Items')">
-            <span class="menu-icon">🎁</span>
-            Personal Items
-        </a>
+<input
+    type="text"
+    id="search"
+    placeholder="Search products..."
+    onkeyup="searchProducts()"
+>
 
-        <a onclick="filterProducts('Men Items')">
-            <span class="menu-icon">👨</span>
-            Men Items
-        </a>
+<button onclick="searchProducts()">🔍</button>
 
-        <a onclick="filterProducts('Women Items')">
-            <span class="menu-icon">👩</span>
-            Women Items
-        </a>
+</div>
 
-        <a onclick="filterProducts('Gadgets')">
-            <span class="menu-icon">📱</span>
-            Gadgets
-        </a>
 
-        <a onclick="filterProducts('Beauty')">
-            <span class="menu-icon">💄</span>
-            Beauty Items
-        </a>
+<div class="header-actions">
 
-        <a onclick="filterProducts('Home')">
-            <span class="menu-icon">🏠</span>
-            Home Items
-        </a>
+<div class="header-action">
 
-        <a onclick="filterProducts('Accessories')">
-            <span class="menu-icon">⌚</span>
-            Accessories
-        </a>
+<span>👤</span>
+<div>Account</div>
 
-        <div class="menu-title">Management</div>
+</div>
 
-        <a onclick="showPage('stock')">
-            <span class="menu-icon">📊</span>
-            Stock
-        </a>
 
-        <a onclick="showPage('sales')">
-            <span class="menu-icon">💰</span>
-            Sales
-        </a>
+<div class="header-action">
 
-        <a onclick="showPage('settings')">
-            <span class="menu-icon">⚙️</span>
-            Settings
-        </a>
+<span>❤️</span>
+<div>Wishlist</div>
 
-    </div>
-</aside>
+</div>
 
 
-<!-- ================= MAIN ================= -->
+<div class="header-action" onclick="openCart()">
 
-<main class="main">
+<span>🛒</span>
+<div>Cart (<b id="cartCount">0</b>)</div>
 
-    <!-- TOPBAR -->
+</div>
 
-    <header class="topbar">
+</div>
 
-        <div class="mobile-menu" onclick="toggleSidebar()">
-            ☰
-        </div>
+</div>
 
-        <div class="page-title">
-            <h2>Dashboard</h2>
-            <p>Welcome to Personal Product in BD</p>
-        </div>
 
-        <div class="admin-info">
-            <div>
-                <strong>Admin</strong>
-            </div>
+<nav class="nav">
 
-            <div class="admin-avatar">
-                A
-            </div>
-        </div>
+<div class="nav-inner">
 
-    </header>
+<a href="#">Home</a>
+<a href="#categories">Categories</a>
+<a href="#flash">Flash Sale</a>
+<a href="#products">All Products</a>
+<a href="#">Men</a>
+<a href="#">Women</a>
+<a href="#">Personal Care</a>
+<a href="#">Gadgets</a>
+<a href="#">Contact</a>
 
+</div>
 
-    <!-- CONTENT -->
+</nav>
 
-    <div class="content">
+</header>
 
-        <!-- ================= STATS ================= -->
 
-        <div class="stats">
 
-            <div class="stat-card">
+<!-- ================= HERO ================= -->
 
-                <div>
-                    <h4>Total Products</h4>
-                    <h2>128</h2>
-                </div>
+<section class="hero">
 
-                <div class="stat-icon">
-                    📦
-                </div>
+<div class="hero-box">
 
-            </div>
+<div class="hero-content">
 
+<div class="small">
+WELCOME TO PERSONAL PRODUCT IN BD
+</div>
 
-            <div class="stat-card">
+<h1>
+Everything You Need,
+All in One Place
+</h1>
 
-                <div>
-                    <h4>Total Orders</h4>
-                    <h2>356</h2>
-                </div>
+<p>
+Shop quality personal products, men's items,
+women's items, gadgets and everyday essentials
+at affordable prices.
+</p>
 
-                <div class="stat-icon">
-                    🛒
-                </div>
+<a href="#products" class="shop-btn">
+SHOP NOW →
+</a>
 
-            </div>
+</div>
 
 
-            <div class="stat-card">
+<div class="hero-products">
 
-                <div>
-                    <h4>Total Customers</h4>
-                    <h2>245</h2>
-                </div>
+<div class="hero-circle">
+🛍️
+</div>
 
-                <div class="stat-icon">
-                    👥
-                </div>
+</div>
 
-            </div>
+</div>
 
+</section>
 
-            <div class="stat-card">
 
-                <div>
-                    <h4>Total Sales</h4>
-                    <h2>৳85,650</h2>
-                </div>
 
-                <div class="stat-icon">
-                    💰
-                </div>
+<!-- ================= FEATURES ================= -->
 
-            </div>
+<div class="container">
 
-        </div>
+<section class="section">
 
+<div class="features">
 
-        <!-- ================= CATEGORY ================= -->
+<div class="feature">
 
-        <div class="section">
+<div class="feature-icon">🚚</div>
 
-            <div class="section-header">
+<div>
+<h3>Fast Delivery</h3>
+<p>Delivery across Bangladesh</p>
+</div>
 
-                <h3>Product Categories</h3>
+</div>
 
-                <button class="btn" onclick="addCategory()">
-                    + Add Category
-                </button>
 
-            </div>
+<div class="feature">
 
-            <div class="products">
+<div class="feature-icon">🔒</div>
 
-                <div class="category-card">
-                    <div class="icon">🎁</div>
-                    <h3>Personal Items</h3>
-                    <p>24 Products</p>
-                </div>
+<div>
+<h3>Secure Payment</h3>
+<p>Safe & trusted payment</p>
+</div>
 
-                <div class="category-card">
-                    <div class="icon">👨</div>
-                    <h3>Men Items</h3>
-                    <p>18 Products</p>
-                </div>
+</div>
 
-                <div class="category-card">
-                    <div class="icon">👩</div>
-                    <h3>Women Items</h3>
-                    <p>26 Products</p>
-                </div>
 
-                <div class="category-card">
-                    <div class="icon">📱</div>
-                    <h3>Gadgets</h3>
-                    <p>22 Products</p>
-                </div>
+<div class="feature">
 
-            </div>
+<div class="feature-icon">↩️</div>
 
-        </div>
+<div>
+<h3>Easy Return</h3>
+<p>Easy return policy</p>
+</div>
 
+</div>
 
-        <!-- ================= PRODUCTS ================= -->
 
-        <div class="section">
+<div class="feature">
 
-            <div class="section-header">
+<div class="feature-icon">☎️</div>
 
-                <h3>Latest Products</h3>
+<div>
+<h3>Customer Support</h3>
+<p>24/7 support</p>
+</div>
 
-                <button class="btn" onclick="addProduct()">
-                    + Add Product
-                </button>
+</div>
 
-            </div>
+</div>
 
-            <div class="products">
+</section>
 
-                <div class="product">
 
-                    <div class="product-img">
-                        👕
-                    </div>
 
-                    <div class="product-info">
+<!-- ================= CATEGORIES ================= -->
 
-                        <span class="category">
-                            Men Items
-                        </span>
+<section class="section" id="categories">
 
-                        <h4>Premium T-Shirt</h4>
+<div class="section-title">
 
-                        <div class="price">
-                            ৳850
-                        </div>
+<h2>Shop By Category</h2>
 
-                        <div class="stock">
-                            Stock: 35
-                        </div>
+<a href="#" class="view-all">
+View All →
+</a>
 
-                    </div>
+</div>
 
-                </div>
 
+<div class="categories">
 
-                <div class="product">
+<div class="category" onclick="categoryFilter('Personal Items')">
+<div class="category-icon">🎁</div>
+<h3>Personal Items</h3>
+<p>120+ Items</p>
+</div>
 
-                    <div class="product-img">
-                        👗
-                    </div>
 
-                    <div class="product-info">
+<div class="category" onclick="categoryFilter('Men Items')">
+<div class="category-icon">👨</div>
+<h3>Men Items</h3>
+<p>85+ Items</p>
+</div>
 
-                        <span class="category">
-                            Women Items
-                        </span>
 
-                        <h4>Fashion Dress</h4>
+<div class="category" onclick="categoryFilter('Women Items')">
+<div class="category-icon">👩</div>
+<h3>Women Items</h3>
+<p>110+ Items</p>
+</div>
 
-                        <div class="price">
-                            ৳1,450
-                        </div>
 
-                        <div class="stock">
-                            Stock: 18
-                        </div>
+<div class="category" onclick="categoryFilter('Gadgets')">
+<div class="category-icon">📱</div>
+<h3>Gadgets</h3>
+<p>75+ Items</p>
+</div>
 
-                    </div>
 
-                </div>
+<div class="category" onclick="categoryFilter('Beauty')">
+<div class="category-icon">💄</div>
+<h3>Beauty</h3>
+<p>90+ Items</p>
+</div>
 
 
-                <div class="product">
+<div class="category" onclick="categoryFilter('Home')">
+<div class="category-icon">🏠</div>
+<h3>Home Items</h3>
+<p>65+ Items</p>
+</div>
 
-                    <div class="product-img">
-                        🎧
-                    </div>
 
-                    <div class="product-info">
+<div class="category" onclick="categoryFilter('Accessories')">
+<div class="category-icon">⌚</div>
+<h3>Accessories</h3>
+<p>80+ Items</p>
+</div>
 
-                        <span class="category">
-                            Gadgets
-                        </span>
+</div>
 
-                        <h4>Wireless Headphone</h4>
+</section>
 
-                        <div class="price">
-                            ৳1,250
-                        </div>
 
-                        <div class="stock">
-                            Stock: 42
-                        </div>
 
-                    </div>
+<!-- ================= FLASH SALE ================= -->
 
-                </div>
+<section class="section" id="flash">
 
+<div class="flash">
 
-                <div class="product">
+<div class="flash-head">
 
-                    <div class="product-img">
-                        🧴
-                    </div>
+<h2>🔥 Flash Sale</h2>
 
-                    <div class="product-info">
+<div class="timer" id="timer">
+Ends Soon
+</div>
 
-                        <span class="category">
-                            Personal Items
-                        </span>
+</div>
 
-                        <h4>Personal Care Kit</h4>
 
-                        <div class="price">
-                            ৳650
-                        </div>
+<div class="products" id="flashProducts">
 
-                        <div class="stock">
-                            Stock: 27
-                        </div>
+<!-- PRODUCT 1 -->
 
-                    </div>
+<div class="product" data-category="Men Items">
 
-                </div>
+<span class="discount">-20%</span>
 
-            </div>
+<div class="product-image">
+👕
+</div>
 
-        </div>
+<div class="product-info">
 
+<div class="product-name">
+Premium Men's Cotton T-Shirt
+</div>
 
-        <!-- ================= ORDERS ================= -->
+<div class="rating">
+★★★★★ (45)
+</div>
 
-        <div class="section">
+<div>
 
-            <div class="section-header">
+<span class="price">৳680</span>
+<span class="old-price">৳850</span>
 
-                <h3>Recent Orders</h3>
+</div>
 
-                <button class="btn">
-                    View All
-                </button>
+<div class="buy-row">
 
-            </div>
+<button
+class="add-cart"
+onclick="addToCart('Premium Men T-Shirt',680,'👕')">
+Add Cart
+</button>
 
-            <div class="table-container">
+<button
+class="buy-now"
+onclick="buyNow('Premium Men T-Shirt',680,'👕')">
+Buy Now
+</button>
 
-                <table>
+</div>
 
-                    <thead>
+</div>
 
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Product</th>
-                            <th>Amount</th>
-                            <th>Payment</th>
-                            <th>Status</th>
-                        </tr>
+</div>
 
-                    </thead>
 
-                    <tbody>
+<!-- PRODUCT 2 -->
 
-                        <tr>
-                            <td>#PP1001</td>
-                            <td>Rahim</td>
-                            <td>Premium T-Shirt</td>
-                            <td>৳850</td>
-                            <td>COD</td>
-                            <td>
-                                <span class="status pending">
-                                    Pending
-                                </span>
-                            </td>
-                        </tr>
+<div class="product" data-category="Women Items">
 
+<span class="discount">-25%</span>
 
-                        <tr>
-                            <td>#PP1002</td>
-                            <td>Karim</td>
-                            <td>Wireless Headphone</td>
-                            <td>৳1,250</td>
-                            <td>bKash</td>
-                            <td>
-                                <span class="status confirmed">
-                                    Confirmed
-                                </span>
-                            </td>
-                        </tr>
+<div class="product-image">
+👗
+</div>
 
+<div class="product-info">
 
-                        <tr>
-                            <td>#PP1003</td>
-                            <td>Nusrat</td>
-                            <td>Fashion Dress</td>
-                            <td>৳1,450</td>
-                            <td>Nagad</td>
-                            <td>
-                                <span class="status confirmed">
-                                    Confirmed
-                                </span>
-                            </td>
-                        </tr>
+<div class="product-name">
+Women's Fashion Dress
+</div>
 
+<div class="rating">
+★★★★★ (32)
+</div>
 
-                        <tr>
-                            <td>#PP1004</td>
-                            <td>Jannat</td>
-                            <td>Personal Care Kit</td>
-                            <td>৳650</td>
-                            <td>COD</td>
-                            <td>
-                                <span class="status cancelled">
-                                    Cancelled
-                                </span>
-                            </td>
-                        </tr>
+<div>
 
-                    </tbody>
+<span class="price">৳1,125</span>
+<span class="old-price">৳1,500</span>
 
-                </table>
+</div>
 
-            </div>
+<div class="buy-row">
 
-        </div>
+<button
+class="add-cart"
+onclick="addToCart('Women Fashion Dress',1125,'👗')">
+Add Cart
+</button>
 
-    </div>
+<button
+class="buy-now"
+onclick="buyNow('Women Fashion Dress',1125,'👗')">
+Buy Now
+</button>
 
-</main>
+</div>
 
+</div>
 
-<!-- ================= JAVASCRIPT ================= -->
+</div>
+
+
+<!-- PRODUCT 3 -->
+
+<div class="product" data-category="Gadgets">
+
+<span class="discount">-30%</span>
+
+<div class="product-image">
+🎧
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Wireless Bluetooth Headphone
+</div>
+
+<div class="rating">
+★★★★★ (68)
+</div>
+
+<div>
+
+<span class="price">৳875</span>
+<span class="old-price">৳1,250</span>
+
+</div>
+
+<div class="buy-row">
+
+<button
+class="add-cart"
+onclick="addToCart('Wireless Bluetooth Headphone',875,'🎧')">
+Add Cart
+</button>
+
+<button
+class="buy-now"
+onclick="buyNow('Wireless Bluetooth Headphone',875,'🎧')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT 4 -->
+
+<div class="product" data-category="Personal Items">
+
+<span class="discount">-15%</span>
+
+<div class="product-image">
+🧴
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Premium Personal Care Kit
+</div>
+
+<div class="rating">
+★★★★★ (27)
+</div>
+
+<div>
+
+<span class="price">৳550</span>
+<span class="old-price">৳650</span>
+
+</div>
+
+<div class="buy-row">
+
+<button
+class="add-cart"
+onclick="addToCart('Personal Care Kit',550,'🧴')">
+Add Cart
+</button>
+
+<button
+class="buy-now"
+onclick="buyNow('Personal Care Kit',550,'🧴')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT 5 -->
+
+<div class="product" data-category="Accessories">
+
+<span class="discount">-18%</span>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Smart Watch Series 8
+</div>
+
+<div class="rating">
+★★★★★ (51)
+</div>
+
+<div>
+
+<span class="price">৳1,640</span>
+<span class="old-price">৳2,000</span>
+
+</div>
+
+<div class="buy-row">
+
+<button
+class="add-cart"
+onclick="addToCart('Smart Watch Series 8',1640,'⌚')">
+Add Cart
+</button>
+
+<button
+class="buy-now"
+onclick="buyNow('Smart Watch Series 8',1640,'⌚')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= ALL PRODUCTS ================= -->
+
+<section class="section" id="products">
+
+<div class="section-title">
+
+<h2>Popular Products</h2>
+
+<a href="#" class="view-all">
+View All →
+</a>
+
+</div>
+
+
+<div class="products">
+
+
+<!-- 1 -->
+
+<div class="product" data-category="Men Items">
+
+<div class="product-image">
+👟
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Men's Casual Sports Shoes
+</div>
+
+<div class="rating">
+★★★★☆ (35)
+</div>
+
+<div>
+<span class="price">৳1,450</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Mens Casual Sports Shoes',1450,'👟')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Mens Casual Sports Shoes',1450,'👟')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="product" data-category="Women Items">
+
+<div class="product-image">
+👜
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Women's Stylish Hand Bag
+</div>
+
+<div class="rating">
+★★★★★ (44)
+</div>
+
+<div>
+<span class="price">৳1,200</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Womens Stylish Hand Bag',1200,'👜')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Womens Stylish Hand Bag',1200,'👜')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="product" data-category="Gadgets">
+
+<div class="product-image">
+🔊
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Portable Bluetooth Speaker
+</div>
+
+<div class="rating">
+★★★★★ (74)
+</div>
+
+<div>
+<span class="price">৳950</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Portable Bluetooth Speaker',950,'🔊')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Portable Bluetooth Speaker',950,'🔊')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="product" data-category="Beauty">
+
+<div class="product-image">
+💄
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Beauty & Makeup Set
+</div>
+
+<div class="rating">
+★★★★★ (29)
+</div>
+
+<div>
+<span class="price">৳780</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Beauty Makeup Set',780,'💄')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Beauty Makeup Set',780,'💄')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="product" data-category="Home">
+
+<div class="product-image">
+☕
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Premium Coffee Mug
+</div>
+
+<div class="rating">
+★★★★☆ (18)
+</div>
+
+<div>
+<span class="price">৳350</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Premium Coffee Mug',350,'☕')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Premium Coffee Mug',350,'☕')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 6 -->
+
+<div class="product" data-category="Personal Items">
+
+<div class="product-image">
+🎒
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Daily Travel Backpack
+</div>
+
+<div class="rating">
+★★★★★ (38)
+</div>
+
+<div>
+<span class="price">৳990</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Daily Travel Backpack',990,'🎒')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Daily Travel Backpack',990,'🎒')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 7 -->
+
+<div class="product" data-category="Accessories">
+
+<div class="product-image">
+🕶️
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Premium Fashion Sunglasses
+</div>
+
+<div class="rating">
+★★★★★ (42)
+</div>
+
+<div>
+<span class="price">৳620</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Premium Fashion Sunglasses',620,'🕶️')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Premium Fashion Sunglasses',620,'🕶️')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 8 -->
+
+<div class="product" data-category="Gadgets">
+
+<div class="product-image">
+⌨️
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Wireless Keyboard & Mouse
+</div>
+
+<div class="rating">
+★★★★☆ (21)
+</div>
+
+<div>
+<span class="price">৳1,150</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Wireless Keyboard Mouse',1150,'⌨️')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Wireless Keyboard Mouse',1150,'⌨️')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 9 -->
+
+<div class="product" data-category="Men Items">
+
+<div class="product-image">
+👔
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Men's Premium Formal Shirt
+</div>
+
+<div class="rating">
+★★★★★ (48)
+</div>
+
+<div>
+<span class="price">৳1,050</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Mens Formal Shirt',1050,'👔')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Mens Formal Shirt',1050,'👔')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 10 -->
+
+<div class="product" data-category="Women Items">
+
+<div class="product-image">
+👡
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+Women's Fashion Sandal
+</div>
+
+<div class="rating">
+★★★★★ (33)
+</div>
+
+<div>
+<span class="price">৳890</span>
+</div>
+
+<div class="buy-row">
+
+<button class="add-cart"
+onclick="addToCart('Womens Fashion Sandal',890,'👡')">
+Add Cart
+</button>
+
+<button class="buy-now"
+onclick="buyNow('Womens Fashion Sandal',890,'👡')">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= CART ================= -->
+
+<div class="cart-overlay" id="cartOverlay">
+
+<div class="cart">
+
+<div class="cart-header">
+
+<h2>Shopping Cart</h2>
+
+<span class="close" onclick="closeCart()">×</span>
+
+</div>
+
+<div id="cartItems">
+
+<p style="padding:25px 0;color:#888;">
+Your cart is empty.
+</p>
+
+</div>
+
+<div class="cart-total">
+
+<span>Total</span>
+
+<span id="cartTotal">
+৳0
+</span>
+
+</div>
+
+<button class="checkout" onclick="checkout()">
+PROCEED TO CHECKOUT
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="footer">
+
+<div>
+
+<h2>
+PERSONAL PRODUCT <span>IN BD</span>
+</h2>
+
+<p>
+Personal Product in BD is an online shopping
+platform for personal products, men's items,
+women's items, gadgets and everyday essentials.
+</p>
+
+<p style="margin-top:15px;">
+📍 Bangladesh
+</p>
+
+<p>
+☎ Customer Support: 01XXXXXXXXX
+</p>
+
+</div>
+
+
+<div>
+
+<h3>Customer Service</h3>
+
+<a href="#">Help Center</a>
+<a href="#">Contact Us</a>
+<a href="#">Return Policy</a>
+<a href="#">Delivery Information</a>
+<a href="#">Privacy Policy</a>
+
+</div>
+
+
+<div>
+
+<h3>Categories</h3>
+
+<a href="#">Personal Items</a>
+<a href="#">Men Items</a>
+<a href="#">Women Items</a>
+<a href="#">Gadgets</a>
+<a href="#">Beauty</a>
+
+</div>
+
+
+<div>
+
+<h3>Follow Us</h3>
+
+<a href="#">Facebook</a>
+<a href="#">Instagram</a>
+<a href="#">TikTok</a>
+<a href="#">YouTube</a>
+
+</div>
+
+</div>
+
+
+<div class="copyright">
+
+© 2026 Personal Product in BD. All Rights Reserved.
+
+</div>
+
+</footer>
+
+
 
 <script>
 
-    function toggleSidebar() {
+/* ================= CART ================= */
 
+let cart = [];
+
+
+function addToCart(name, price, icon){
+
+    cart.push({
+        name:name,
+        price:price,
+        icon:icon
+    });
+
+    updateCart();
+
+    alert(name + " added to cart!");
+
+}
+
+
+function updateCart(){
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
+    let container =
+        document.getElementById("cartItems");
+
+    let total = 0;
+
+    if(cart.length === 0){
+
+        container.innerHTML =
+        `<p style="padding:25px 0;color:#888;">
+        Your cart is empty.
+        </p>`;
+
+    }else{
+
+        container.innerHTML = "";
+
+        cart.forEach((item,index)=>{
+
+            total += item.price;
+
+            container.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="cart-img">
+                    ${item.icon}
+                </div>
+
+                <div style="flex:1">
+
+                    <h4>
+                        ${item.name}
+                    </h4>
+
+                    <div class="cart-price">
+                        ৳${item.price}
+                    </div>
+
+                </div>
+
+                <div
+                onclick="removeCart(${index})"
+                style="cursor:pointer;color:red;">
+                    ✕
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+    document.getElementById("cartTotal").innerText =
+        "৳" + total;
+
+}
+
+
+function removeCart(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+
+}
+
+
+function openCart(){
+
+    document.getElementById("cartOverlay").style.display =
+        "block";
+
+}
+
+
+function closeCart(){
+
+    document.getElementById("cartOverlay").style.display =
+        "none";
+
+}
+
+
+/* ================= BUY NOW ================= */
+
+function buyNow(name,price,icon){
+
+    cart.push({
+        name:name,
+        price:price,
+        icon:icon
+    });
+
+    updateCart();
+
+    openCart();
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+function checkout(){
+
+    if(cart.length === 0){
+
+        alert("Your cart is empty!");
+
+        return;
+    }
+
+    let name =
+        prompt("Enter your name:");
+
+    if(!name) return;
+
+    let phone =
+        prompt("Enter your phone number:");
+
+    if(!phone) return;
+
+    let address =
+        prompt("Enter delivery address:");
+
+    if(!address) return;
+
+    let payment =
+        prompt(
+        "Payment Method:\n1 = Cash on Delivery\n2 = bKash\n3 = Nagad"
+        );
+
+    alert(
+        "Order Placed Successfully!\n\n" +
+        "Customer: " + name +
+        "\nPhone: " + phone +
+        "\nPayment: " + payment
+    );
+
+    cart = [];
+
+    updateCart();
+
+    closeCart();
+
+}
+
+
+/* ================= CATEGORY FILTER ================= */
+
+function categoryFilter(category){
+
+    document.getElementById("products")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    let products =
+        document.querySelectorAll(".product");
+
+    products.forEach(product=>{
+
+        if(
+            product.dataset.category === category
+        ){
+
+            product.style.display = "block";
+
+        }else{
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts(){
+
+    let search =
         document
-            .getElementById("sidebar")
-            .classList
-            .toggle("show");
+        .getElementById("search")
+        .value
+        .toLowerCase();
 
-    }
+    let products =
+        document.querySelectorAll(".product");
 
+    products.forEach(product=>{
 
-    function showPage(page) {
+        let name =
+            product
+            .querySelector(".product-name")
+            .innerText
+            .toLowerCase();
 
-        alert(
-            page.toUpperCase() +
-            " section selected."
-        );
+        if(name.includes(search)){
 
-    }
+            product.style.display =
+                "block";
 
+        }else{
 
-    function filterProducts(category) {
-
-        alert(
-            "Showing products from: " +
-            category
-        );
-
-    }
-
-
-    function addProduct() {
-
-        let name = prompt(
-            "Enter Product Name:"
-        );
-
-        if (name) {
-
-            alert(
-                name +
-                " added successfully!"
-            );
+            product.style.display =
+                "none";
 
         }
 
+    });
+
+}
+
+
+/* ================= TIMER ================= */
+
+let time = 3600;
+
+setInterval(()=>{
+
+    let hours =
+        Math.floor(time / 3600);
+
+    let minutes =
+        Math.floor((time % 3600) / 60);
+
+    let seconds =
+        time % 60;
+
+    document.getElementById("timer")
+        .innerText =
+        hours + "h " +
+        minutes + "m " +
+        seconds + "s";
+
+    time--;
+
+    if(time < 0){
+
+        time = 3600;
+
     }
 
-
-    function addCategory() {
-
-        let category = prompt(
-            "Enter New Category:"
-        );
-
-        if (category) {
-
-            alert(
-                category +
-                " category created!"
-            );
-
-        }
-
-    }
+},1000);
 
 </script>
 
